@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purchases</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h3 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+      }
+      form {
+        display: grid;
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+      label {
+        font-weight: 500;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #2980b9;
+      }
+      .butt {
+        background-color: #2ecc71;
+        margin-bottom: 20px;
+      }
+      .butt:hover {
+        background-color: #27ae60;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      th {
+        background-color: #f2f2f2;
+        font-weight: 500;
+      }
+      tr:hover {
+        background-color: #f9f9f9;
+      }
+      .action-buttons button {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="dashboard.html"><button class="butt">Home</button></a>
+      <h3>Purchases</h3>
+      <form id="purchase-form">
+        <div>
+          <label for="product">Product:</label>
+          <select id="product" required>
+            <option value="Chick mash">Chick mash</option>
+            <option value="Growers mash">Growers mash</option>
+            <option value="Kienyeji mash">Kienyeji mash</option>
+            <option value="Layers mash">Layers mash</option>
+          </select>
+        </div>
+        <div>
+          <label for="quantity">Quantity (kg):</label>
+          <input
+            type="number"
+            id="quantity"
+            placeholder="Enter quantity"
+            required
+          />
+        </div>
+        <div>
+          <label for="cost">Cost:</label>
+          <input type="number" id="cost" placeholder="Enter cost" required />
+        </div>
+        <div>
+          <label for="purchase-date">Date:</label>
+          <input type="date" id="purchase-date" required />
+        </div>
+        <button type="submit">Save Purchase</button>
+      </form>
+
+      <h3>Saved Purchases</h3>
+      <div id="purchases-data">
+        <!-- Saved purchases data will be displayed here -->
+      </div>
+    </div>
+
+    <script src="purchases.js"></script>
+    <script>
+      const user = localStorage.getItem("username");
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>

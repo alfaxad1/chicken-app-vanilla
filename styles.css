@@ -1,0 +1,160 @@
+/* :root {
+    --primary-color: #4a90e2;
+    --secondary-color: #f5a623;
+    --accent-color: #28a745;
+    --background-color: #f0f2f5;
+    --text-color: #333;
+    --card-background: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Roboto', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    padding: 20px;
+  }
+  
+  .dashboard {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+  
+  h1, h2, h3 {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    text-align: center;
+  }
+  
+  .card {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  form {
+    display: grid;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  button, .category {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 10px auto;
+    text-decoration: none;
+    display: block;
+    width: 80%;
+    max-width: 300px;
+  }
+  
+  button:hover, .category:hover {
+    background-color: #3a7bd5;
+    transform: translateY(-3px);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f8f8f8;
+  }
+  
+  .butt {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .butt:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+  }
+  
+  #download-btn, button[onclick="location.href='index.html'"] {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+     border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+  }
+  
+  #download-btn:hover, button[onclick="location.href='index.html'"]:hover {
+    background-color: #e09600;
+    transform: translateY(-2px);
+  }
+  
+  button[onclick="location.href='index.html'"] {
+    position: absolute;
+    top: 10px;
+    right: 100px;
+  } */

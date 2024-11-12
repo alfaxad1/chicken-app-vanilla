@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profit Report</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+      }
+      .profit-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      .profit-table th,
+      .profit-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .profit-table th {
+        background-color: #f2f2f2;
+        font-weight: 500;
+      }
+      .profit-table tr:hover {
+        background-color: #f9f9f9;
+      }
+      .positive {
+        color: #27ae60;
+      }
+      .negative {
+        color: #e74c3c;
+      }
+      #download-btn {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      #download-btn:hover {
+        background-color: #2980b9;
+      }
+      .butt {
+        background-color: #2ecc71;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        margin-right: 10px;
+      }
+      .butt:hover {
+        background-color: #27ae60;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Profit Report</h1>
+      <div id="profits-data">
+        <!-- Table will be inserted here -->
+      </div>
+      <button id="download-btn">Download Report</button>
+      <a href="dashboard.html"><button class="butt">Home</button></a>
+    </div>
+
+    <script src="profits.js"></script>
+    <script>
+      const user = localStorage.getItem("username");
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>

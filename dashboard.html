@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chicken Project Management - Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #4895ef;
+        --background-color: #f8f9fa;
+        --card-bg: #ffffff;
+        --text-primary: #2b2d42;
+        --text-secondary: #8d99ae;
+        --success-color: #4cc9f0;
+        --warning-color: #f72585;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--background-color);
+        color: var(--text-primary);
+      }
+
+      .dashboard-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .header h1 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+      }
+
+      .logout-btn {
+        background-color: var(--warning-color);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: opacity 0.3s;
+      }
+
+      .logout-btn:hover {
+        opacity: 0.9;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .card {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-icon {
+        font-size: 2rem;
+        color: var(--primary-color);
+      }
+
+      .card-title {
+        font-size: 1.2rem;
+        color: var(--text-primary);
+        margin-top: 0.5rem;
+      }
+
+      .card-description {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      .stats-container {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+      }
+
+      @media (max-width: 768px) {
+        .cards-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <header class="header">
+        <h1>Chicken Farm Management</h1>
+        <button class="logout-btn" onclick="location.href='index.html'">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </header>
+
+      <div class="cards-grid">
+        <div class="card" onclick="location.href='purchase.html'">
+          <i class="fas fa-shopping-cart card-icon"></i>
+          <h3 class="card-title">Purchases</h3>
+          <p class="card-description">Manage feed and supplies purchases</p>
+        </div>
+
+        <div class="card" onclick="location.href='expenses.html'">
+          <i class="fas fa-money-bill-wave card-icon"></i>
+          <h3 class="card-title">Expenses</h3>
+          <p class="card-description">Track and manage farm expenses</p>
+        </div>
+
+        <div class="card" onclick="location.href='sales.html'">
+          <i class="fas fa-cash-register card-icon"></i>
+          <h3 class="card-title">Sales</h3>
+          <p class="card-description">Record and monitor sales</p>
+        </div>
+
+        <div class="card" onclick="location.href='egg-collection.html'">
+          <i class="fas fa-egg card-icon"></i>
+          <h3 class="card-title">Eggs Collection</h3>
+          <p class="card-description">Track daily egg collection</p>
+        </div>
+
+        <div class="card" onclick="location.href='chickenPurchases.html'">
+          <i class="fas fa-feather card-icon"></i>
+          <h3 class="card-title">Chicken Purchases</h3>
+          <p class="card-description">Manage chicken inventory</p>
+        </div>
+
+        <div class="card" onclick="location.href='profits.html'">
+          <i class="fas fa-chart-line card-icon"></i>
+          <h3 class="card-title">Reports</h3>
+          <p class="card-description">View financial reports and analytics</p>
+        </div>
+      </div>
+
+      <div class="stats-container">
+        <!-- Add quick statistics or summary here -->
+        <div id="quick-stats">
+          <!-- Will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const user = localStorage.getItem("username");
+      if (!user) {
+        window.location.href = "index.html";
+      }
+
+      // You can add JavaScript to fetch and display quick statistics
+      // For example:
+      fetch("http://localhost:3000/api/dashboard-stats")
+        .then((response) => response.json())
+        .then((stats) => {
+          // Update dashboard stats
+        })
+        .catch((error) => console.error("Error:", error));
+    </script>
+  </body>
+</html>

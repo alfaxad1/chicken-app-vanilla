@@ -1,0 +1,255 @@
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:316:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:121:7)
+    at SendStream.emit (node:events:519:28)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:349:19
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at serveStatic (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:75:16)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:349:19
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at serveStatic (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:75:16)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:349:19
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at serveStatic (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:75:16)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:349:19
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at serveStatic (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:75:16)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:349:19
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at serveStatic (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:75:16)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:351:19
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at serveStatic (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:75:16)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:351:19
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at serveStatic (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:75:16)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:316:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:121:7)
+    at SendStream.emit (node:events:519:28)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:316:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:121:7)
+    at SendStream.emit (node:events:519:28)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:316:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:121:7)
+    at SendStream.emit (node:events:519:28)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:303:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at serveStatic (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:75:16)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:303:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at serveStatic (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:75:16)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:303:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at serveStatic (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:75:16)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:316:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:121:7)
+    at SendStream.emit (node:events:519:28)
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: Connection lost: The server closed the connection.
+    at Protocol.end (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/mysql/lib/protocol/Protocol.js:112:13)
+    at Socket.<anonymous> (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/mysql/lib/Connection.js:94:28)
+    at Socket.<anonymous> (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/mysql/lib/Connection.js:526:10)
+    at Socket.emit (node:events:531:35)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+Emitted 'error' event on Connection instance at:
+    at Connection._handleProtocolError (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/mysql/lib/Connection.js:423:8)
+    at Protocol.emit (node:events:519:28)
+    at Protocol._delegateError (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/mysql/lib/protocol/Protocol.js:398:10)
+    at Protocol.end (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/mysql/lib/protocol/Protocol.js:116:8)
+    at Socket.<anonymous> (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/mysql/lib/Connection.js:94:28)
+    [... lines matching original stack trace ...]
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  fatal: true,
+  code: 'PROTOCOL_CONNECTION_LOST'
+}
+
+Node.js v20.17.0
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:316:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:121:7)
+    at SendStream.emit (node:events:519:28)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:316:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:121:7)
+    at SendStream.emit (node:events:519:28)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:316:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:121:7)
+    at SendStream.emit (node:events:519:28)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:316:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:121:7)
+    at SendStream.emit (node:events:519:28)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:316:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:121:7)
+    at SendStream.emit (node:events:519:28)
+ReferenceError: db is not defined
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/config.js:316:3
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/home/ajiantrh/chickenproject.ajiambojackychicken.com/node_modules/serve-static/index.js:121:7)
+    at SendStream.emit (node:events:519:28)
