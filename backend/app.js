@@ -13,6 +13,7 @@ const profit = require("./routes/profit");
 const expenses = require("./routes/expenses");
 const eggCollection = require("./routes/eggCollection");
 const chickenPurchases = require("./routes/chickenPurchase");
+const users = require("./routes/users");
 
 app.use("/api/purchases", purchases);
 app.use("/api/sales", sales);
@@ -20,6 +21,7 @@ app.use("/api/profits", profit);
 app.use("/api/expenses", expenses);
 app.use("/api/egg-collection", eggCollection);
 app.use("/api/chicken-purchases", chickenPurchases);
+app.use("/api/users", users);
 
 const PORT = process.env.PORT;
 const appName = process.env.APP_NAME;
