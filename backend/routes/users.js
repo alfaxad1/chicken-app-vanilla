@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const validate = require("../models/registerModel");
 const connection = require("../config/dbConnection");
 const router = express.Router();
 router.use(express.json());
@@ -18,15 +19,26 @@ router.get("/", (req, res) => {
   });
 });
 
+//delete a user
+router.delete("/:id", (req, res) => {
+  const sql = "DELETE FROM users WHERE id = ?";
+  connection.query(sql, [req.params.id], (err, result) => {
+    if (err) return res.status(500).json({ error: "error deleting user" });
+    res.status(200).json({ message: "User deleted successfully" });
+  });
+});
+
 //register a user
-router.post("/register", (req, res) => {
+router.post("/register", validate, (req, res) => {
   const sql = "INSERT INTO users (username, password, role) VALUES (?)";
   bcrypt.hash(req.body.password, salt, (err, hash) => {
     if (err) return res.status(500).json({ error: "error hashing password" });
     const values = [req.body.username, hash, req.body.role];
     connection.query(sql, [values], (err, result) => {
       if (err) return res.status(500).json({ error: "error registering user" });
-      res.status(200).json({ message: "User registered successfully" });
+      res
+        .status(200)
+        .json({ message: "User registered successfully", Status: "Success" });
     });
   });
 });
