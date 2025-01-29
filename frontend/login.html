@@ -110,6 +110,15 @@
           padding: 1.5rem;
         }
       }
+
+      .register-link {
+        text-align: center;
+        padding: 10px;
+      }
+      #error-message {
+        color: red;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -132,10 +141,14 @@
             required
           />
         </div>
+        <div id="error-message"></div>
+        <div class="register-link">
+          <a href="register.html">Don't have an account? Register</a>
+        </div>
         <button type="submit">Login</button>
       </form>
     </div>
 
-    <script src="script.js"></script>
+    <script src="login.js"></script>
   </body>
 </html>
