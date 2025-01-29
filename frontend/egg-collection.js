@@ -10,8 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const eggsCollected = document.getElementById("eggs-collected").value;
     const damagedEggs = document.getElementById("damaged-eggs").value;
 
+    const url = "http://localhost:3000";
+
     // Save to database
-    fetch("http://localhost:3000/api/egg-collection", {
+    fetch(`${url}/api/egg-collection`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to display collection history
   function displayCollectionHistory() {
-    fetch("http://localhost:3000/api/egg-collection")
+    fetch(`${url}/api/egg-collection`)
       .then((response) => response.json())
       .then((collections) => {
         const tableContainer = document.getElementById("collection-data");
@@ -80,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to update the chart
   function updateChart() {
-    fetch("http://localhost:3000/api/egg-collection/monthly")
+    fetch(`${url}/api/egg-collection/monthly`)
       .then((response) => response.json())
       .then((data) => {
         const ctx = document
@@ -140,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to delete collection
   window.deleteCollection = function (id) {
     if (confirm("Are you sure you want to delete this record?")) {
-      fetch(`http://localhost:3000/api/egg-collection/${id}`, {
+      fetch(`${url}/api/egg-collection/${id}`, {
         method: "DELETE",
       })
         .then((response) => response.json())

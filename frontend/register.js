@@ -7,7 +7,9 @@ document
     const password = document.getElementById("password").value;
     const role = document.getElementById("role").value.toLowerCase();
 
-    fetch("http://localhost:3000/api/users/register", {
+    const url = "http://localhost:3000";
+
+    fetch(`${url}/api/users/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

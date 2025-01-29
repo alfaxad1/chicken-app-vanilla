@@ -6,7 +6,9 @@ document
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    fetch("http://localhost:3000/api/users/login", {
+    const url = "http://localhost:3000";
+
+    fetch(`${url}/api/users/login `, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password }),
@@ -20,7 +22,7 @@ document
           console.log(data.token);
         } else {
           const error = document.getElementById("error-message");
-          error.innerText = "Incorrect username or password";
+          error.innerText = data.error;
         }
       })
       .catch((error) => {

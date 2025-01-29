@@ -47,7 +47,7 @@ router.post("/register", validate, (req, res) => {
 router.post("/login", (req, res) => {
   const sql = "SELECT * FROM users WHERE username = ?";
   connection.query(sql, [req.body.username], (err, result) => {
-    if (err) return res.json({ error: "error logging in" });
+    if (err) return res.json({ error: "Error logging in" });
     if (result.length > 0) {
       bcrypt.compare(req.body.password, result[0].password, (err, response) => {
         if (err) return res.json({ error: "password does not match" });
@@ -59,11 +59,11 @@ router.post("/login", (req, res) => {
           res.cookie("token", token, { httpOnly: true });
           return res.json({ token, Status: "Success" });
         } else {
-          res.json({ error: "incorect password" });
+          res.json({ error: "Incorect password" });
         }
       });
     } else {
-      res.json({ error: "user not found" });
+      res.json({ error: "User not found" });
     }
   });
 });

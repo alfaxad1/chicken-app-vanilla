@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("http://localhost:3000/api/profits", {
+  const url = "http://localhost:3000";
+
+  fetch(`${url}/api/profits`, {
     method: "GET",
   })
     .then((response) => {

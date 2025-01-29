@@ -11,8 +11,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const cost = document.getElementById("expense-cost").value;
     const date = document.getElementById("expense-date").value;
 
+    const url = "http://localhost:3000";
+
     // Save to the database
-    fetch("http://localhost:3000/api/expenses", {
+    fetch(`${url}/api/expenses`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type, cost, date }),
@@ -31,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function displayExpenses() {
-    fetch("http://localhost:3000/api/expenses")
+    fetch(`${url}/api/expenses`)
       .then((response) => response.json())
       .then((expenses) => {
         if (expenses.length === 0) {
@@ -103,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cost = document.getElementById(`expense-cost-${id}`).value;
     const date = document.getElementById(`expense-date-${id}`).value;
 
-    fetch(`http://localhost:3000/api/expenses/${id}`, {
+    fetch(`${url}/api/expenses/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type, cost, date }),
@@ -119,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.deleteExpense = function (id) {
     const confirmed = confirm("Do you want to delete this expense?");
     if (confirmed) {
-      fetch(`http://localhost:3000/api/expenses/${id}`, {
+      fetch(`${url}/api/expenses/${id}`, {
         method: "DELETE",
       })
         .then((response) => response.json())

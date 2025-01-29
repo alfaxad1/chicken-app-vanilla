@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const numberOfPieces = document.getElementById("number-of-pieces");
   const totalPrice = document.getElementById("total-price");
 
+  const url = "http://localhost:3000";
+
   // Automatically calculate total when price or pieces are updated
   pricePerPiece.addEventListener("input", calculateTotal);
   numberOfPieces.addEventListener("input", calculateTotal);
@@ -35,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(userValues);
 
     // Save to the backend (API)
-    fetch("http://localhost:3000/api/chicken-purchases", {
+    fetch(`${url}/api/chicken-purchases`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userValues),
@@ -51,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to display saved purchases from the database
   function displayPurchases() {
-    fetch("http://localhost:3000/api/chicken-purchases")
+    fetch(`${url}/api/chicken-purchases`)
       .then((response) => response.json())
       .then((purchases) => {
         chickenPurchasesData.innerHTML = `
@@ -122,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
       `#purchases-table-body input:nth-child(6)`
     ).value;
 
-    fetch(`http://localhost:3000/api/chicken-purchases/${id}`, {
+    fetch(`${url}/api/chicken-purchases/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -147,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmed = confirm("Are you sure you want to delete?");
 
     if (confirmed) {
-      fetch(`http://localhost:3000/api/chicken-purchases/${id}`, {
+      fetch(`${url}/api/chicken-purchases/${id}`, {
         method: "DELETE",
       })
         .then((response) => response.json())

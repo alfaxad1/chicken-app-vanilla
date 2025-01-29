@@ -1,21 +1,3 @@
-function deletePurchase(id) {
-  const confirmed = confirm("Do you want to delete this purchase?");
-  if (confirmed) {
-    fetch(`http://localhost:3000/api/purchases/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.message);
-        displayPurchases();
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        displayPurchases();
-      });
-  }
-}
-
 document.addEventListener("DOMContentLoaded", function () {
   const purchaseForm = document.getElementById("purchase-form");
   const purchasesData = document.getElementById("purchases-data");
@@ -30,8 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const price = document.getElementById("cost").value;
     const date = document.getElementById("purchase-date").value;
 
+    const url = "http://localhost:3000";
+
     // Save to local storage or database
-    fetch("http://localhost:3000/api/purchases", {
+    fetch(`${url}/api/purchases`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ product, qty, price, date }),
@@ -48,8 +32,26 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => console.error("Error: ", error));
   });
 
+  function deletePurchase(id) {
+    const confirmed = confirm("Do you want to delete this purchase?");
+    if (confirmed) {
+      fetch(`${url}/api/purchases/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.message);
+          displayPurchases();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          displayPurchases();
+        });
+    }
+  }
+
   function displayPurchases() {
-    fetch("http://localhost:3000/api/purchases")
+    fetch(`${url}/api/purchases`)
       .then((response) => response.json())
       .then((purchases) => {
         purchasesData.innerHTML = `
@@ -102,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const price = document.getElementById(`purchase-price-${id}`).value;
     const date = document.getElementById(`purchase-date-${id}`).value;
 
-    fetch(`http://localhost:3000/api/purchases/${id}`, {
+    fetch(`${url}/api/purchases/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ product, quantity, price, date }),

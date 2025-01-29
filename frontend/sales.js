@@ -82,10 +82,10 @@ document.addEventListener("DOMContentLoaded", function () {
         date: document.getElementById("eggs-sale-date").value,
       };
     }
-    //const URL = "http://localhost:3000/api/sales";
+    const url = "http://localhost:3000";
 
     // Save to the database
-    fetch("http://localhost:3000/api/sales", {
+    fetch(`${url}/api/sales`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(saleData),
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function displaySales() {
-    fetch("http://localhost:3000/api/sales")
+    fetch(`${url}/api/sales`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.deleteSale = function (id) {
     const confirmed = confirm("Do you want to delete this sale?");
     if (confirmed) {
-      fetch(`http://localhost:3000/api/sales/${id}`, {
+      fetch(`${url}/api/sales/${id}`, {
         method: "DELETE",
       })
         .then((response) => response.json())
