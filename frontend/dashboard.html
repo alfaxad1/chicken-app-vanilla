@@ -176,19 +176,10 @@
     </div>
 
     <script>
-      const user = localStorage.getItem("username");
-      if (!user) {
+      const token = localStorage.getItem("token");
+      if (!token) {
         window.location.href = "index.html";
       }
-
-      // You can add JavaScript to fetch and display quick statistics
-      // For example:
-      fetch("http://localhost:3000/api/dashboard-stats")
-        .then((response) => response.json())
-        .then((stats) => {
-          // Update dashboard stats
-        })
-        .catch((error) => console.error("Error:", error));
     </script>
   </body>
 </html>

@@ -14,9 +14,10 @@ document
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
-        if (data.Status === "Success") {
+        if (data.token) {
+          localStorage.setItem("token", data.token);
           window.location.href = "dashboard.html";
-          console.log(data);
+          console.log(data.token);
         } else {
           const error = document.getElementById("error-message");
           error.innerText = "Incorrect username or password";
