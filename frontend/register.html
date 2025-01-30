@@ -122,36 +122,38 @@
     </style>
   </head>
   <body>
-    <div class="register-container">
-      <div class="register-header">
-        <h2>Chicken Farm Management</h2>
-        <p>Please Register</p>
+    <div class="reg-form">
+      <div class="register-container">
+        <div class="register-header">
+          <h2>Chicken Farm Management</h2>
+          <p>Please Register</p>
+        </div>
+        <form id="register-form">
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" id="username" placeholder="Username" required />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" id="role" placeholder="Role" required />
+          </div>
+          <div id="error-message"></div>
+          <div id="validation-message"></div>
+          <div class="login-link">
+            <a href="superAdmin.html">Go back</a>
+          </div>
+          <button type="submit">Register</button>
+        </form>
       </div>
-      <form id="register-form">
-        <div class="input-group">
-          <i class="fas fa-user"></i>
-          <input type="text" id="username" placeholder="Username" required />
-        </div>
-        <div class="input-group">
-          <i class="fas fa-lock"></i>
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            required
-          />
-        </div>
-        <div class="input-group">
-          <i class="fas fa-user"></i>
-          <input type="text" id="role" placeholder="Role" required />
-        </div>
-        <div id="error-message"></div>
-        <div id="validation-message"></div>
-        <div class="login-link">
-          <a href="superAdmin.html">Go back</a>
-        </div>
-        <button type="submit">Register</button>
-      </form>
     </div>
 
     <script src="register.js"></script>

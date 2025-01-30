@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="styles.css" />
+
     <script>
       function logoutUser() {
         localStorage.removeItem("user");
@@ -90,7 +91,7 @@
     <button class="logout-btn" onclick="logoutUser()">
       <i class="fas fa-sign-out-alt"></i> Logout
     </button>
-    <h1>This is the super admin page</h1>
+    <h1 class="admin-title">This is the super admin page</h1>
     <div id="users-table"></div>
     <div>
       <button class="dash-btn">
@@ -98,9 +99,48 @@
       </button>
     </div>
     <div>
-      <button class="reg-btn">
-        <a class="register-link" href="register.html">Create a new user</a>
-      </button>
+      <button class="reg-btn" onclick="createUser()">Create User</button>
     </div>
+
+    <!-- Show the register form -->
+    <div id="register-container" class="register-container">
+      <div class="register-header">
+        <h2>Register a new user</h2>
+      </div>
+      <form id="register-form">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="username" placeholder="Username" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="role" placeholder="Role" required />
+        </div>
+        <div id="error-message"></div>
+        <div id="validation-message"></div>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+
+    <!-- The show function -->
+    <script>
+      const register = document.getElementById("register-container");
+      register.style.display = "none";
+      const createUser = () => {
+        register.style.display = "block";
+      };
+    </script>
+
+    <!-- Link the JavaScript file -->
+    <script src="register.js"></script>
   </body>
 </html>
