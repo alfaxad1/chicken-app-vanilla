@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const authenticateToken = require("../middlewares/auth");
 const validate = require("../models/registerModel");
 const connection = require("../config/dbConnection");
 const router = express.Router();
@@ -52,12 +53,18 @@ router.post("/login", (req, res) => {
       bcrypt.compare(req.body.password, result[0].password, (err, response) => {
         if (err) return res.json({ error: "password does not match" });
         if (response) {
+          const user = result[0];
+          const id = result[0].id;
           const username = result[0].username;
+          const role = result[0].role;
           const secret = process.env.JWT_SECRET;
-          const token = jwt.sign({ username }, secret, { expiresIn: "1h" });
-          //   res.json(token);
+          const token = jwt.sign({ id }, secret, {
+            expiresIn: "1h",
+          });
+
           res.cookie("token", token, { httpOnly: true });
-          return res.json({ token, Status: "Success" });
+
+          return res.json({ token, user });
         } else {
           res.json({ error: "Incorect password" });
         }
