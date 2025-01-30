@@ -137,7 +137,7 @@
       if (!token) {
         window.location.href = "login.html";
       }
-      if (user.role !== "admin") {
+      if (user.role !== "admin" && user.role !== "superadmin") {
         window.document.getElementById("purchase-fields").remove();
         window.document.getElementById("purchase-title").remove();
       }

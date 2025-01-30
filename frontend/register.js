@@ -22,11 +22,12 @@ document
       .then((data) => {
         console.log(data);
         if (data.Status === "Success") {
-          window.location.href = "login.html";
+          window.location.href = "superAdmin.html";
           console.log(data);
         } else if (data.error) {
+          const errorMessage = data.error.message.replace(/"/g, "");
           const userInputError = document.getElementById("validation-message");
-          userInputError.innerText = data.error;
+          userInputError.innerText = `${errorMessage}`;
         } else {
           const error = document.getElementById("error-message");
           error.innerText = "Error registering user";

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      function logoutUser() {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        localStorage.removeItem("access_token_expiry");
+        window.location.href = "login.html";
+      }
+
+      function isTokenExpired() {
+        const accessTokenExpiry = localStorage.getItem("access_token_expiry");
+        if (!accessTokenExpiry) return true;
+
+        const now = new Date().getTime();
+        return now > accessTokenExpiry;
+      }
+
+      (function checkSession() {
+        const token = localStorage.getItem("token");
+        if (!token || isTokenExpired()) {
+          logoutUser();
+        }
+      })();
+    </script>
+    <script>
+      const usersTable = document.getElementById("users-table");
+      const url = "http://localhost:3000";
+      const getUsers = () => {
+        fetch(`${url}/api/users`)
+          .then((response) => response.json())
+          .then((users) => {
+            console.log(users);
+            const usersTable = document.getElementById("users-table");
+            usersTable.innerHTML = `
+                <table >
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Role</th>
+                      <th>Actions</th>
+                    </tr>
+                 </thead>
+                 <tbody id="users-table-body"></tbody>
+                </table>
+        `;
+            const tableBody = document.getElementById("users-table-body");
+            users.forEach((user) => {
+              const row = document.createElement("tr");
+              row.innerHTML = `
+                <td>${user.username}</td>
+                <td>${user.role}</td>
+                <td class="action-buttons">
+                  <button class="delete-button" onclick="deleteUser(${user.id})">Delete</button>
+                </td>
+              `;
+              tableBody.appendChild(row);
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      };
+      getUsers();
+
+      const deleteUser = (id) => {
+        const confirmed = confirm("Do you want to delete this user?");
+        if (confirmed) {
+          fetch(`${url}/api/users/${id}`, {
+            method: "DELETE",
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              getUsers();
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              getUsers();
+            });
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <button class="logout-btn" onclick="logoutUser()">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
+    <h1>This is the super admin page</h1>
+    <div id="users-table"></div>
+    <div>
+      <button class="dash-btn">
+        <a class="dash-link" href="dashboard.html">Continue to dashboard</a>
+      </button>
+    </div>
+    <div>
+      <button class="reg-btn">
+        <a class="register-link" href="register.html">Create a new user</a>
+      </button>
+    </div>
+  </body>
+</html>

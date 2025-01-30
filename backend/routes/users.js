@@ -34,7 +34,7 @@ router.post("/register", validate, (req, res) => {
   const sql = "INSERT INTO users (username, password, role) VALUES (?)";
   bcrypt.hash(req.body.password, salt, (err, hash) => {
     if (err) return res.status(500).json({ error: "error hashing password" });
-    const values = [req.body.username, hash, req.body.role];
+    const values = [req.body.username, hash, req.body.role.toLowerCase()];
     connection.query(sql, [values], (err, result) => {
       if (err) return res.status(500).json({ error: "error registering user" });
       res
@@ -61,9 +61,7 @@ router.post("/login", (req, res) => {
           const token = jwt.sign({ id }, secret, {
             expiresIn: "1h",
           });
-
           res.cookie("token", token, { httpOnly: true });
-
           return res.json({ token, user });
         } else {
           res.json({ error: "Incorect password" });

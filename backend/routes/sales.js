@@ -70,7 +70,6 @@ router.get("/", (request, response) => {
       console.error("Error fetching sales:", err);
       return response.status(500).json({ error: err.message });
     }
-    console.log("Fetched sales:", results); // Add this line
     return response.status(200).json(results);
   });
 });

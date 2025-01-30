@@ -169,7 +169,7 @@
       if (!token) {
         window.location.href = "login.html";
       }
-      if (user.role !== "admin") {
+      if (user.role !== "admin" && user.role !== "superadmin") {
         window.document.getElementById("expenses-fields").remove();
         window.document.getElementById("expenses-title").remove();
       }

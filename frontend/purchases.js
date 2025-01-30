@@ -31,24 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => console.error("Error: ", error));
   });
 
-  function deletePurchase(id) {
-    const confirmed = confirm("Do you want to delete this purchase?");
-    if (confirmed) {
-      fetch(`${url}/api/purchases/${id}`, {
-        method: "DELETE",
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data.message);
-          displayPurchases();
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          displayPurchases();
-        });
-    }
-  }
-
   function displayPurchases() {
     fetch(`${url}/api/purchases`)
       .then((response) => response.json())
@@ -114,6 +96,24 @@ document.addEventListener("DOMContentLoaded", function () {
         displayPurchases();
       })
       .catch((error) => console.error("Error updating purchase:", error));
+  }
+
+  function deletePurchase(id) {
+    const confirmed = confirm("Do you want to delete this purchase?");
+    if (confirmed) {
+      fetch(`${url}/api/purchases/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.message);
+          displayPurchases();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          displayPurchases();
+        });
+    }
   }
 
   displayPurchases();
