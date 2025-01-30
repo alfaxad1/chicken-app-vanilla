@@ -90,35 +90,37 @@
   <body>
     <div class="container">
       <a href="dashboard.html"><button class="butt">Home</button></a>
-      <h3>Purchases</h3>
+      <h3 id="purchase-title">Purchases</h3>
       <form id="purchase-form">
-        <div>
-          <label for="product">Product:</label>
-          <select id="product" required>
-            <option value="Chick mash">Chick mash</option>
-            <option value="Growers mash">Growers mash</option>
-            <option value="Kienyeji mash">Kienyeji mash</option>
-            <option value="Layers mash">Layers mash</option>
-          </select>
+        <div id="purchase-fields">
+          <div>
+            <label for="product">Product:</label>
+            <select id="product" required>
+              <option value="Chick mash">Chick mash</option>
+              <option value="Growers mash">Growers mash</option>
+              <option value="Kienyeji mash">Kienyeji mash</option>
+              <option value="Layers mash">Layers mash</option>
+            </select>
+          </div>
+          <div>
+            <label for="quantity">Quantity (kg):</label>
+            <input
+              type="number"
+              id="quantity"
+              placeholder="Enter quantity"
+              required
+            />
+          </div>
+          <div>
+            <label for="cost">Cost:</label>
+            <input type="number" id="cost" placeholder="Enter cost" required />
+          </div>
+          <div>
+            <label for="purchase-date">Date:</label>
+            <input type="date" id="purchase-date" required />
+          </div>
+          <button type="submit">Save Purchase</button>
         </div>
-        <div>
-          <label for="quantity">Quantity (kg):</label>
-          <input
-            type="number"
-            id="quantity"
-            placeholder="Enter quantity"
-            required
-          />
-        </div>
-        <div>
-          <label for="cost">Cost:</label>
-          <input type="number" id="cost" placeholder="Enter cost" required />
-        </div>
-        <div>
-          <label for="purchase-date">Date:</label>
-          <input type="date" id="purchase-date" required />
-        </div>
-        <button type="submit">Save Purchase</button>
       </form>
 
       <h3>Saved Purchases</h3>
@@ -129,9 +131,15 @@
 
     <script src="purchases.js"></script>
     <script>
+      const user = JSON.parse(localStorage.getItem("user"));
+      console.log(user);
       const token = localStorage.getItem("token");
       if (!token) {
-        window.location.href = "index.html";
+        window.location.href = "login.html";
+      }
+      if (user.role !== "admin") {
+        window.document.getElementById("purchase-fields").remove();
+        window.document.getElementById("purchase-title").remove();
       }
     </script>
   </body>

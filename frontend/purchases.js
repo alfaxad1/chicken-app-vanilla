@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const url = "http://localhost:3000";
   const purchaseForm = document.getElementById("purchase-form");
   const purchasesData = document.getElementById("purchases-data");
 
@@ -12,9 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const price = document.getElementById("cost").value;
     const date = document.getElementById("purchase-date").value;
 
-    const url = "http://localhost:3000";
-
-    // Save to local storage or database
+    // Save to database
     fetch(`${url}/api/purchases`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const url = "http://localhost:3000";
   const form = document.getElementById("egg-collection-form");
   let chart = null;
 
@@ -9,8 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const collectionDate = document.getElementById("collection-date").value;
     const eggsCollected = document.getElementById("eggs-collected").value;
     const damagedEggs = document.getElementById("damaged-eggs").value;
-
-    const url = "http://localhost:3000";
 
     // Save to database
     fetch(`${url}/api/egg-collection`, {

@@ -17,9 +17,13 @@ document
       .then((data) => {
         console.log(data.message);
         if (data.token) {
+          const accessTokenExpiry = new Date().getTime() + 3600 * 1000;
+          localStorage.setItem("access_token_expiry", accessTokenExpiry);
+          localStorage.setItem("user", JSON.stringify(data.user));
           localStorage.setItem("token", data.token);
           window.location.href = "dashboard.html";
           console.log(data.token);
+          console.log(data.user);
         } else {
           const error = document.getElementById("error-message");
           error.innerText = data.error;

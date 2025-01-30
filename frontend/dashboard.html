@@ -8,6 +8,29 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <script>
+      function logoutUser() {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        localStorage.removeItem("access_token_expiry");
+        window.location.href = "login.html";
+      }
+
+      function isTokenExpired() {
+        const accessTokenExpiry = localStorage.getItem("access_token_expiry");
+        if (!accessTokenExpiry) return true;
+
+        const now = new Date().getTime();
+        return now > accessTokenExpiry;
+      }
+
+      (function checkSession() {
+        const token = localStorage.getItem("token");
+        if (!token || isTokenExpired()) {
+          logoutUser();
+        }
+      })();
+    </script>
     <style>
       :root {
         --primary-color: #4361ee;
@@ -124,13 +147,17 @@
     <div class="dashboard-container">
       <header class="header">
         <h1>Chicken Farm Management</h1>
-        <button class="logout-btn" onclick="location.href='login.html'">
+        <button class="logout-btn" onclick="logoutUser()">
           <i class="fas fa-sign-out-alt"></i> Logout
         </button>
       </header>
 
       <div class="cards-grid">
-        <div class="card" onclick="location.href='purchase.html'">
+        <div
+          class="card"
+          id="purchase-card"
+          onclick="location.href='purchase.html'"
+        >
           <i class="fas fa-shopping-cart card-icon"></i>
           <h3 class="card-title">Purchases</h3>
           <p class="card-description">Manage feed and supplies purchases</p>
@@ -160,7 +187,11 @@
           <p class="card-description">Manage chicken inventory</p>
         </div>
 
-        <div class="card" onclick="location.href='profits.html'">
+        <div
+          class="card"
+          id="report-card"
+          onclick="location.href='profits.html'"
+        >
           <i class="fas fa-chart-line card-icon"></i>
           <h3 class="card-title">Reports</h3>
           <p class="card-description">View financial reports and analytics</p>
@@ -177,8 +208,12 @@
 
     <script>
       const token = localStorage.getItem("token");
+      const user = JSON.parse(localStorage.getItem("user"));
       if (!token) {
-        window.location.href = "index.html";
+        window.location.href = "login.html";
+      }
+      if (user.role !== "admin") {
+        window.document.getElementById("report-card").remove();
       }
     </script>
   </body>

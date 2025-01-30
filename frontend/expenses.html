@@ -126,31 +126,33 @@
   <body>
     <div class="container">
       <a href="dashboard.html"><button class="butt">Home</button></a>
-      <h3>Expenses</h3>
+      <h3 id="expenses-title">Expenses</h3>
       <form id="expenses-form">
-        <div>
-          <label for="expense-type">Type of Expense:</label>
-          <input
-            type="text"
-            id="expense-type"
-            placeholder="Enter expense type"
-            required
-          />
+        <div id="expenses-fields">
+          <div>
+            <label for="expense-type">Type of Expense:</label>
+            <input
+              type="text"
+              id="expense-type"
+              placeholder="Enter expense type"
+              required
+            />
+          </div>
+          <div>
+            <label for="expense-cost">Cost:</label>
+            <input
+              type="number"
+              id="expense-cost"
+              placeholder="Enter cost"
+              required
+            />
+          </div>
+          <div>
+            <label for="expense-date">Date:</label>
+            <input type="date" id="expense-date" required />
+          </div>
+          <button type="submit">Save Expense</button>
         </div>
-        <div>
-          <label for="expense-cost">Cost:</label>
-          <input
-            type="number"
-            id="expense-cost"
-            placeholder="Enter cost"
-            required
-          />
-        </div>
-        <div>
-          <label for="expense-date">Date:</label>
-          <input type="date" id="expense-date" required />
-        </div>
-        <button type="submit">Save Expense</button>
       </form>
 
       <h3>Saved Expenses</h3>
@@ -161,9 +163,15 @@
 
     <script src="expenses.js"></script>
     <script>
+      const user = JSON.parse(localStorage.getItem("user"));
+      console.log(user);
       const token = localStorage.getItem("token");
       if (!token) {
-        window.location.href = "index.html";
+        window.location.href = "login.html";
+      }
+      if (user.role !== "admin") {
+        window.document.getElementById("expenses-fields").remove();
+        window.document.getElementById("expenses-title").remove();
       }
     </script>
   </body>

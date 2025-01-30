@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const url = "http://localhost:3000";
   const chickenPurchasesForm = document.getElementById("chickenPurchases-form");
   const chickenPurchasesData = document.getElementById("chickenPurchases-data");
   const pricePerPiece = document.getElementById("price-per-piece");
   const numberOfPieces = document.getElementById("number-of-pieces");
   const totalPrice = document.getElementById("total-price");
-
-  const url = "http://localhost:3000";
 
   // Automatically calculate total when price or pieces are updated
   pricePerPiece.addEventListener("input", calculateTotal);

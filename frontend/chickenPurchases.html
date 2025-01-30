@@ -121,43 +121,59 @@
   </head>
   <body>
     <a href="dashboard.html"><button class="butt">Home</button></a>
-    <h3>Chicken Purchases</h3>
+    <h3 id="chickenPurchases-title">Chicken Purchases</h3>
     <form id="chickenPurchases-form">
-      <label for="supplier-id">Supplier ID: </label>
-      <input
-        type="text"
-        id="supplier-id"
-        placeholder="Enter supplier's name"
-        required
-      /><br />
-      <label for="type-of-chicken">Type of Chicken: </label>
-      <select id="type-of-chicken" required>
-        <option value="chick">Chick</option>
-        <option value="hen">Hen</option>
-        <option value="cockerel">Cockerel</option></select
-      ><br />
-      <label for="price-per-piece">Price per piece: </label>
-      <input
-        type="number"
-        id="price-per-piece"
-        placeholder="Enter price per piece"
-        required
-      /><br />
-      <label for="number-of-pieces">No. of pieces: </label>
-      <input
-        type="number"
-        id="number-of-pieces"
-        placeholder="Enter number of pieces"
-        required
-      /><br />
-      <label for="total-price-chicken">Total:</label>
-      <input type="number" id="total-price" placeholder="Total" readonly />
-      <br />
-      <label for="purchase-date">Date:</label>
-      <input type="date" id="purchase-date" required /><br />
-
-      <!-- Add the Save Button here -->
-      <button type="submit">Save</button>
+      <div id="chickenPurchases-fields">
+        <div>
+          <label for="supplier-id">Supplier ID: </label>
+          <input
+            type="text"
+            id="supplier-id"
+            placeholder="Enter supplier's name"
+            required
+          />
+        </div>
+        <br />
+        <div>
+          <label for="type-of-chicken">Type of Chicken: </label>
+          <select id="type-of-chicken" required>
+            <option value="chick">Chick</option>
+            <option value="hen">Hen</option>
+            <option value="cockerel">Cockerel</option>
+          </select>
+        </div>
+        <br />
+        <div>
+          <label for="price-per-piece">Price per piece: </label>
+          <input
+            type="number"
+            id="price-per-piece"
+            placeholder="Enter price per piece"
+            required
+          />
+        </div>
+        <br />
+        <div>
+          <label for="number-of-pieces">No. of pieces: </label>
+          <input
+            type="number"
+            id="number-of-pieces"
+            placeholder="Enter number of pieces"
+            required
+          />
+        </div>
+        <br />
+        <div>
+          <label for="total-price-chicken">Total:</label>
+          <input type="number" id="total-price" placeholder="Total" readonly />
+        </div>
+        <br />
+        <div>
+          <label for="purchase-date">Date:</label>
+          <input type="date" id="purchase-date" required /><br />
+        </div>
+        <button type="submit">Save</button>
+      </div>
     </form>
 
     <h3>Saved Chicken Purchases</h3>
@@ -170,8 +186,16 @@
 
     <script>
       const token = localStorage.getItem("token");
+      const user = JSON.parse(localStorage.getItem("user"));
       if (!token) {
-        window.location.href = "index.html";
+        window.location.href = "login.html";
+      }
+      if (user.role !== "admin") {
+        window.document.getElementById(
+          "chickenPurchases-fields"
+        ).style.display = "none";
+        window.document.getElementById("chickenPurchases-title").style.display =
+          "none";
       }
     </script>
   </body>

@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const url = "http://localhost:3000";
   const saleTypeSelect = document.getElementById("sale-type");
   const chickenSaleFields = document.getElementById("chicken-sale-fields");
   const eggsSaleFields = document.getElementById("eggs-sale-fields");
@@ -82,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function () {
         date: document.getElementById("eggs-sale-date").value,
       };
     }
-    const url = "http://localhost:3000";
 
     // Save to the database
     fetch(`${url}/api/sales`, {

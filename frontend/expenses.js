@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const url = "http://localhost:3000";
   const expensesForm = document.getElementById("expenses-form");
   const expensesData = document.getElementById("expenses-data");
 
@@ -10,8 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const type = document.getElementById("expense-type").value;
     const cost = document.getElementById("expense-cost").value;
     const date = document.getElementById("expense-date").value;
-
-    const url = "http://localhost:3000";
 
     // Save to the database
     fetch(`${url}/api/expenses`, {
