@@ -71,15 +71,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => console.error("Error fetching purchases:", error));
   }
 
-  function enableEditingPurchase(id) {
+  window.enableEditingPurchase = function (id) {
     document.getElementById(`purchase-product-${id}`).disabled = false;
     document.getElementById(`purchase-quantity-${id}`).disabled = false;
     document.getElementById(`purchase-price-${id}`).disabled = false;
     document.getElementById(`purchase-date-${id}`).disabled = false;
     document.getElementById(`save-btn-purchase-${id}`).style.display = "inline";
-  }
+  };
 
-  function savePurchase(id) {
+  window.savePurchase = function (id) {
     const product = document.getElementById(`purchase-product-${id}`).value;
     const quantity = document.getElementById(`purchase-quantity-${id}`).value;
     const price = document.getElementById(`purchase-price-${id}`).value;
@@ -96,9 +96,9 @@ document.addEventListener("DOMContentLoaded", function () {
         displayPurchases();
       })
       .catch((error) => console.error("Error updating purchase:", error));
-  }
+  };
 
-  function deletePurchase(id) {
+  window.deletePurchase = function (id) {
     const confirmed = confirm("Do you want to delete this purchase?");
     if (confirmed) {
       fetch(`${url}/api/purchases/${id}`, {
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
           displayPurchases();
         });
     }
-  }
+  };
 
   displayPurchases();
 });

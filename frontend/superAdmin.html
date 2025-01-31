@@ -54,10 +54,10 @@
             users.forEach((user) => {
               const row = document.createElement("tr");
               row.innerHTML = `
-                <td>${user.username}</td>
-                <td>${user.role}</td>
+                <td> <input type="text" value="${user.username}" disabled></td>
+                <td> <input type="text" value="${user.role}" disabled></td>
                 <td class="action-buttons">
-                  <button class="delete-button" onclick="deleteUser(${user.id})">Delete</button>
+                  <button class="delete-btn" onclick="deleteUser(${user.id})">Delete</button>
                 </td>
               `;
               tableBody.appendChild(row);
@@ -91,7 +91,7 @@
     <button class="logout-btn" onclick="logoutUser()">
       <i class="fas fa-sign-out-alt"></i> Logout
     </button>
-    <h1 class="admin-title">This is the super admin page</h1>
+    <h1 class="admin-title">Admin Dashboard</h1>
     <div id="users-table"></div>
     <div>
       <button class="dash-btn">
@@ -104,10 +104,10 @@
 
     <!-- Show the register form -->
     <div id="register-container" class="register-container">
-      <div class="register-header">
-        <h2>Register a new user</h2>
-      </div>
       <form id="register-form">
+        <div class="register-header">
+          <h2>Register a new user</h2>
+        </div>
         <div class="input-group">
           <i class="fas fa-user"></i>
           <input type="text" id="username" placeholder="Username" required />
@@ -135,9 +135,23 @@
     <script>
       const register = document.getElementById("register-container");
       register.style.display = "none";
+
       const createUser = () => {
-        register.style.display = "block";
+        register.style.display = "flex"; // Changed to flex to center the modal
+        document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
       };
+
+      const closeRegisterForm = () => {
+        register.style.display = "none";
+        document.body.style.overflow = "auto"; // Re-enable scrolling
+      };
+
+      // Close modal if clicking outside the form
+      register.addEventListener("click", (e) => {
+        if (e.target === register) {
+          closeRegisterForm();
+        }
+      });
     </script>
 
     <!-- Link the JavaScript file -->

@@ -50,9 +50,9 @@ router.put("/:id", (request, response) => {
   const { id } = request.params;
   const { type, cost, date } = request.body;
 
-  const query = "UPDATE expenses SET type = ?, cost = ?, date = ? WHERE id = ?";
+  const query = "UPDATE expenses SET ? WHERE id = ?";
 
-  connection.query(query, [type, cost, date, id], (err, result) => {
+  connection.query(query, [request.body, id], (err, result) => {
     if (err) {
       return response.status(500).json({ error: err.message });
     }
