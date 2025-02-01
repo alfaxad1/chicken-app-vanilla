@@ -129,6 +129,14 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((data) => {
           console.log(data.message);
           displayExpenses();
+          const info = document.getElementById("info");
+          const toast = document.createElement("div");
+          toast.classList.add("toast");
+          toast.innerHTML = `<p>${data.message}</p>`;
+          info.appendChild(toast);
+          setTimeout(() => {
+            toast.remove();
+          }, 2000);
         })
         .catch((error) => {
           console.error("Error deleting expense:", error);
@@ -139,9 +147,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Display expenses when the page loads
   displayExpenses();
-
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (user.role !== "admin" && user.role !== "superadmin") {
-    window.document.getElementById("action-buttons").remove();
-  }
 });

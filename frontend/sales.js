@@ -228,6 +228,14 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((data) => {
           console.log(data.message);
           displaySales();
+          const info = document.getElementById("info");
+          const toast = document.createElement("div");
+          toast.classList.add("toast");
+          toast.innerHTML = `<p>${data.message}</p>`;
+          info.appendChild(toast);
+          setTimeout(() => {
+            toast.remove();
+          }, 2000);
         })
         .catch((error) => {
           console.error("Error deleting sale:", error);

@@ -164,6 +164,14 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((data) => {
           console.log("Deleted:", data.message);
           displayPurchases(); // Refresh the table
+          const info = document.getElementById("info");
+          const toast = document.createElement("div");
+          toast.classList.add("toast");
+          toast.innerHTML = `<p>${data.message}</p>`;
+          info.appendChild(toast);
+          setTimeout(() => {
+            toast.remove();
+          }, 2000);
         })
         .catch((error) => console.error("Error:", error));
     }

@@ -121,6 +121,18 @@
       .edit-btn:hover {
         background-color: #d35400;
       }
+      .toast {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #988f8f;
+        color: #fff;
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
     </style>
   </head>
   <body>
@@ -154,7 +166,7 @@
           <button type="submit">Save Expense</button>
         </div>
       </form>
-
+      <div id="info"></div>
       <h3>Saved Expenses</h3>
       <div id="expenses-data">
         <!-- Saved expenses data will be displayed here -->
