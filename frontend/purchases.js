@@ -55,16 +55,25 @@ document.addEventListener("DOMContentLoaded", function () {
         purchases.forEach((purchase) => {
           const row = document.createElement("tr");
 
+          //logic to remove the actions column when the user is not an admin
+          let actions = `
+              <td class="action-buttons" id="purchase-actions">
+                <button onclick="enableEditingPurchase(${purchase.id})">Edit</button>
+                <button id="save-btn-purchase-${purchase.id}" onclick="savePurchase(${purchase.id})" style="display:none;">Save</button>
+                <button id="delete-btn-purchase-${purchase.id}" onclick="deletePurchase(${purchase.id})">Delete</button>
+              </td>`;
+          const user = JSON.parse(localStorage.getItem("user"));
+          if (user.role !== "admin" && user.role !== "superadmin") {
+            actions = `<td></td>`;
+          }
+
           row.innerHTML = `
               <td><input type="text" id="purchase-product-${purchase.id}" value="${purchase.product_name}" disabled></td>
               <td><input type="number" id="purchase-quantity-${purchase.id}" value="${purchase.quantity}" disabled></td>
               <td><input type="number" id="purchase-price-${purchase.id}" value="${purchase.price}" disabled></td>
               <td><input type="date" id="purchase-date-${purchase.id}" value="${purchase.purchase_date}" disabled></td>
-              <td class="action-buttons">
-                <button onclick="enableEditingPurchase(${purchase.id})">Edit</button>
-                <button id="save-btn-purchase-${purchase.id}" onclick="savePurchase(${purchase.id})" style="display:none;">Save</button>
-                <button onclick="deletePurchase(${purchase.id})">Delete</button>
-              </td> `;
+              ${actions}
+               `;
           tableBody.appendChild(row);
         });
       })
@@ -108,6 +117,14 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((data) => {
           console.log(data.message);
           displayPurchases();
+          const info = document.getElementById("info");
+          const toast = document.createElement("div");
+          toast.classList.add("toast");
+          toast.innerHTML = `<p>${data.message}</p>`;
+          info.appendChild(toast);
+          setTimeout(() => {
+            toast.remove();
+          }, 2000);
         })
         .catch((error) => {
           console.error("Error:", error);

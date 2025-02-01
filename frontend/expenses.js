@@ -57,6 +57,19 @@ document.addEventListener("DOMContentLoaded", function () {
         const tableBody = document.getElementById("expenses-table-body");
 
         expenses.forEach((expense) => {
+          //logic to remove the actions column when the user is not an admin
+          let actions = `
+          <td class="action-buttons">
+            <button class="edit-btn" onclick="enableEditingExpense(${expense.id})">Edit</button>
+            <button id="save-btn-expense-${expense.id}" onclick="saveExpense(${expense.id})" style="display:none;">Save</button>
+            <button class="delete-btn" onclick="deleteExpense(${expense.id})">Delete</button>
+          </td>`;
+
+          const user = JSON.parse(localStorage.getItem("user"));
+          if (user.role !== "admin" && user.role !== "superadmin") {
+            actions = `<td></td>`;
+          }
+
           const row = document.createElement("tr");
           row.innerHTML = `
             <td><input type="text" id="expense-type-${expense.id}" value="${
@@ -68,19 +81,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <td><input type="date" id="expense-date-${expense.id}" value="${
             expense.Date.split("T")[0]
           }" disabled></td>
-            <td class="action-buttons">
-              <button class="edit-btn" onclick="enableEditingExpense(${
-                expense.id
-              })">Edit</button>
-              <button id="save-btn-expense-${
-                expense.id
-              }" onclick="saveExpense(${
-            expense.id
-          })" style="display:none;">Save</button>
-              <button class="delete-btn" onclick="deleteExpense(${
-                expense.id
-              })">Delete</button>
-            </td>`;
+          ${actions}
+            `;
           tableBody.appendChild(row);
         });
       })
@@ -137,4 +139,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Display expenses when the page loads
   displayExpenses();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user.role !== "admin" && user.role !== "superadmin") {
+    window.document.getElementById("action-buttons").remove();
+  }
 });

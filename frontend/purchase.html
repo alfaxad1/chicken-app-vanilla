@@ -85,6 +85,18 @@
       .action-buttons button {
         margin-right: 5px;
       }
+      .toast {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #988f8f;
+        color: #fff;
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
     </style>
   </head>
   <body>
@@ -122,7 +134,7 @@
           <button type="submit">Save Purchase</button>
         </div>
       </form>
-
+      <div id="info"></div>
       <h3>Saved Purchases</h3>
       <div id="purchases-data">
         <!-- Saved purchases data will be displayed here -->
@@ -132,7 +144,6 @@
     <script src="purchases.js"></script>
     <script>
       const user = JSON.parse(localStorage.getItem("user"));
-      console.log(user);
       const token = localStorage.getItem("token");
       if (!token) {
         window.location.href = "login.html";

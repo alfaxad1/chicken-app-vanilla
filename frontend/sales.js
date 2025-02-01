@@ -175,6 +175,17 @@ document.addEventListener("DOMContentLoaded", function () {
           const pricePerUnit =
             sale.price_per_piece || sale.price_per_unit || "N/A";
 
+          //logic to remove the actions column when the user is not an admin
+          let actions = `
+                    <td class="action-buttons">
+                        <button class="edit-btn" onclick="enableEditingSale(${sale.id})">Edit</button>
+                        <button class="delete-btn" onclick="deleteSale(${sale.id})">Delete</button>
+                    </td>`;
+          const user = JSON.parse(localStorage.getItem("user"));
+          if (user.role !== "admin" && user.role !== "superadmin") {
+            actions = `<td></td>`;
+          }
+
           row.innerHTML = `
                     <td>${formattedDate}</td>
                     <td>${sale.customer_id || "N/A"}</td>
@@ -182,14 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${quantity}</td>
                     <td>${pricePerUnit}</td>
                     <td>${sale.total_price || "N/A"}</td>
-                    <td class="action-buttons">
-                        <button class="edit-btn" onclick="enableEditingSale(${
-                          sale.id
-                        })">Edit</button>
-                        <button class="delete-btn" onclick="deleteSale(${
-                          sale.id
-                        })">Delete</button>
-                    </td>
+                    <td>${actions}</td>
                 `;
 
           tableBody.appendChild(row);

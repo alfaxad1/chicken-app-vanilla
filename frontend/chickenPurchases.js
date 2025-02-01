@@ -76,6 +76,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         purchases.forEach((purchase) => {
           const row = document.createElement("tr");
+
+          //logic to remove the actions column when the user is not an admin
+          let actions = `
+                      <td>
+                          <button onclick="enableEditing(${purchase.id})">Edit</button>
+                          <button onclick="deletePurchase(${purchase.id})">Delete</button>
+                          <button id="save-btn-${purchase.id}" style="display:none;" onclick="savePurchase(${purchase.id})">Save</button>
+                      </td>`;
+          const user = JSON.parse(localStorage.getItem("user"));
+          if (user.role !== "admin" && user.role !== "superadmin") {
+            actions = `<td></td>`;
+          }
+
           row.innerHTML = `
                         <td><input type="text" value="${purchase.supplier_id}" disabled></td>
                         <td><input type="text" value="${purchase.chicken_type}" disabled></td>
@@ -83,12 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         <td><input type="number" value="${purchase.no_of_pieces}" disabled></td>
                         <td><input type="number" value="${purchase.total_price}" disabled></td>
                         <td><input type="date" value="${purchase.purchase_date}" disabled></td>
-                        <td>
-                            <button onclick="enableEditing(${purchase.id})">Edit</button>
-                            <button onclick="deletePurchase(${purchase.id})">Delete</button>
-                            <button id="save-btn-${purchase.id}" style="display:none;" onclick="savePurchase(${purchase.id})">Save</button>
-                        </td>
-                    `;
+                        ${actions}
+                      `;
           tableBody.appendChild(row);
         });
       })
