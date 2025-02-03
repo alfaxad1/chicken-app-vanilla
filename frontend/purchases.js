@@ -22,7 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
-        // Display saved purchases
+        const info = document.getElementById("saved");
+        const toast = document.createElement("div");
+        toast.classList.add("toast");
+        toast.innerHTML = `<p>${data.message}</p>`;
+        info.appendChild(toast);
+        setTimeout(() => {
+          toast.remove();
+        }, 2000);
         displayPurchases();
 
         // Clear form
@@ -102,14 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
-        const info = document.getElementById("saved");
-        const toast = document.createElement("div");
-        toast.classList.add("toast");
-        toast.innerHTML = `<p>${data.message}</p>`;
-        info.appendChild(toast);
-        setTimeout(() => {
-          toast.remove();
-        }, 2000);
         displayPurchases();
       })
       .catch((error) => console.error("Error updating purchase:", error));

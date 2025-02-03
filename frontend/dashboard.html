@@ -130,10 +130,21 @@
 
       .stats-container {
         background: var(--card-bg);
-        padding: 1.5rem;
+        font-size: 3.2rem;
+        color: green;
+        font-weight: bolder;
+        font-style: var(--accent-color);
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         margin-bottom: 2rem;
+      }
+      .tittle {
+        font-size: 1rem;
+        font-weight: bold;
+        color: black;
+      }
+      .data {
+        padding-left: 40px;
       }
 
       @media (max-width: 768px) {
@@ -217,5 +228,6 @@
         window.document.getElementById("report-card").remove();
       }
     </script>
+    <script src="calculation.js"></script>
   </body>
 </html>
