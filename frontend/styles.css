@@ -265,3 +265,15 @@ td input:disabled {
 .delete-btn:hover {
   background-color: #c0392b;
 }
+.toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #988f8f;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}

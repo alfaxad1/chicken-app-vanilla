@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(`${url}/api/chicken-purchases`)
       .then((response) => response.json())
       .then((purchases) => {
+        console.log(purchases);
         chickenPurchasesData.innerHTML = `
                     <table>
                         <thead>

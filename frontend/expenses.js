@@ -23,6 +23,14 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(data.message);
         // Display saved expenses
         displayExpenses();
+        const info = document.getElementById("saved");
+        const toast = document.createElement("div");
+        toast.classList.add("toast");
+        toast.innerHTML = `<p>${data.message}</p>`;
+        info.appendChild(toast);
+        setTimeout(() => {
+          toast.remove();
+        }, 2000);
         // Clear form
         expensesForm.reset();
       })
