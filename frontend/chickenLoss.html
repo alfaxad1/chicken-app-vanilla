@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Chicken Loss Data</h1>
+    <button onclick="create()">Create</button>
+    <div class="container" id="container">
+      <form id="chickenLoss-form">
+        <div>
+          <label for="chicken-type">Chicken Type</label>
+          <select id="chicken-type">
+            <option value="chick">chick</option>
+            <option value="hen">hen</option>
+            <option value="cockerel">cockerel</option>
+          </select>
+        </div>
+        <br />
+        <div>
+          <label for="cause">Cause: </label>
+          <input type="text" id="cause" placeholder="Cause of loss" />
+        </div>
+        <br />
+        <div>
+          <label for="number">Number of chicken: </label>
+          <input type="text" id="number" required placeholder="Number" />
+        </div>
+        <br />
+        <div>
+          <label for="date">Date: </label>
+          <input type="date" id="date" required placeholder="Date" />
+        </div>
+        <br />
+        <button type="submit">Save</button>
+        <button onclick="closeForm()">Close</button>
+      </form>
+    </div>
+    <div>
+      <h3>Saved Data</h3>
+      <div id="chickenLoss-data"></div>
+    </div>
+    <script src="chickenLoss.js"></script>
+  </body>
+</html>

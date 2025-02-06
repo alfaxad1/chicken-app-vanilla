@@ -4,7 +4,7 @@ const router = express.Router();
 router.use(express.json());
 
 router.post("/", (req, res) => {
-  const { chickenType, number, cause, date } = req.body;
+  const { chickenType, cause, number, date } = req.body;
   const query =
     "INSERT INTO chicken_loss (chicken_type, cause, number, date) VALUES (?, ?, ?, ?)";
   connection.query(query, [chickenType, cause, number, date], (err, result) => {

@@ -135,67 +135,73 @@
     </style>
   </head>
   <body>
-    <a href="dashboard.html"><button class="butt">Home</button></a>
-    <h3 id="chickenPurchases-title">Chicken Purchases</h3>
-    <form id="chickenPurchases-form">
-      <div id="chickenPurchases-fields">
-        <div>
-          <label for="supplier-id">Supplier ID: </label>
-          <input
-            type="text"
-            id="supplier-id"
-            placeholder="Enter supplier's name"
-            required
-          />
+    <div class="container">
+      <a href="dashboard.html"><button class="butt">Home</button></a>
+      <h3 id="chickenPurchases-title">Chicken Purchases</h3>
+      <form id="chickenPurchases-form">
+        <div id="chickenPurchases-fields">
+          <div>
+            <label for="supplier-id">Supplier ID: </label>
+            <input
+              type="text"
+              id="supplier-id"
+              placeholder="Enter supplier's name"
+              required
+            />
+          </div>
+          <br />
+          <div>
+            <label for="type-of-chicken">Type of Chicken: </label>
+            <select id="type-of-chicken" required>
+              <option value="chick">Chick</option>
+              <option value="hen">Hen</option>
+              <option value="cockerel">Cockerel</option>
+            </select>
+          </div>
+          <br />
+          <div>
+            <label for="price-per-piece">Price per piece: </label>
+            <input
+              type="number"
+              id="price-per-piece"
+              placeholder="Enter price per piece"
+              required
+            />
+          </div>
+          <br />
+          <div>
+            <label for="number-of-pieces">No. of pieces: </label>
+            <input
+              type="number"
+              id="number-of-pieces"
+              placeholder="Enter number of pieces"
+              required
+            />
+          </div>
+          <br />
+          <div>
+            <label for="total-price-chicken">Total:</label>
+            <input
+              type="number"
+              id="total-price"
+              placeholder="Total"
+              readonly
+            />
+          </div>
+          <br />
+          <div>
+            <label for="purchase-date">Date:</label>
+            <input type="date" id="purchase-date" required /><br />
+          </div>
+          <button type="submit">Save</button>
         </div>
-        <br />
-        <div>
-          <label for="type-of-chicken">Type of Chicken: </label>
-          <select id="type-of-chicken" required>
-            <option value="chick">Chick</option>
-            <option value="hen">Hen</option>
-            <option value="cockerel">Cockerel</option>
-          </select>
-        </div>
-        <br />
-        <div>
-          <label for="price-per-piece">Price per piece: </label>
-          <input
-            type="number"
-            id="price-per-piece"
-            placeholder="Enter price per piece"
-            required
-          />
-        </div>
-        <br />
-        <div>
-          <label for="number-of-pieces">No. of pieces: </label>
-          <input
-            type="number"
-            id="number-of-pieces"
-            placeholder="Enter number of pieces"
-            required
-          />
-        </div>
-        <br />
-        <div>
-          <label for="total-price-chicken">Total:</label>
-          <input type="number" id="total-price" placeholder="Total" readonly />
-        </div>
-        <br />
-        <div>
-          <label for="purchase-date">Date:</label>
-          <input type="date" id="purchase-date" required /><br />
-        </div>
-        <button type="submit">Save</button>
+      </form>
+      <div id="info"></div>
+      <h3>Saved Chicken Purchases</h3>
+      <div id="chickenPurchases-data">
+        <!-- Saved ChickenPurchases data will be displayed here -->
       </div>
-    </form>
-    <div id="info"></div>
-    <h3>Saved Chicken Purchases</h3>
-    <div id="chickenPurchases-data">
-      <!-- Saved ChickenPurchases data will be displayed here -->
     </div>
-
     <!-- Link the JavaScript file -->
     <script src="chickenPurchases.js"></script>
 
