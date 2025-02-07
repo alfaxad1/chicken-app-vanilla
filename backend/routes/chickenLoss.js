@@ -24,4 +24,13 @@ router.get("/", (req, res) => {
   });
 });
 
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  const query = `DELETE FROM chicken_loss WHERE id = ?`;
+  connection.query(query, [id], (err, results) => {
+    if (err) throw err;
+    res.json({ message: "Deleted successfully" });
+  });
+});
+
 module.exports = router;

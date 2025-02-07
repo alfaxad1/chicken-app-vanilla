@@ -38,6 +38,15 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
+          const info = document.getElementById("info");
+          const toast = document.createElement("div");
+          toast.classList.add("toast");
+          toast.innerHTML = `<p>${data.message}</p>`;
+          info.appendChild(toast);
+          setTimeout(() => {
+            toast.remove();
+          }, 2000);
+
           fetchChikenLosses();
           form.reset();
           closeForm();
@@ -65,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   <td>Actions</td>
               </tr>
             </thead>
-            <tbody class="chicken-loss-table-body"></tbody>
+            <tbody id="chicken-loss-table-body"></tbody>
         </table>
       `;
 
@@ -87,9 +96,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
           const row = document.createElement("tr");
           row.innerHTML = `
-        <td>${chickenLoss.chickenType}</td>
-        <td>${chickenLoss.cause}</td>
+        <td>${chickenLoss.chicken_type}</td>
         <td>${chickenLoss.number}</td>
+        <td>${chickenLoss.cause}</td>
         <td>${chickenLoss.date.split("T")[0]}</td>
         ${actions}
       `;
@@ -102,4 +111,30 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   };
   fetchChikenLosses();
+
+  window.deleteChickenLoss = function (id) {
+    const confirmed = confirm("Are you sure you want to delete");
+    if (confirmed) {
+      fetch(`${url}/api/chicken-loss/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.message);
+          fetchChikenLosses();
+
+          const info = document.getElementById("info");
+          const toast = document.createElement("div");
+          toast.classList.add("toast");
+          toast.innerHTML = `<p>${data.message}</p>`;
+          info.appendChild(toast);
+          setTimeout(() => {
+            toast.remove();
+          }, 2000);
+        })
+        .catch((error) => {
+          console.log("Error deleting:", error);
+        });
+    }
+  };
 });

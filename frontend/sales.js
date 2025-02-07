@@ -1,3 +1,22 @@
+const container = document.getElementById("container");
+container.style.display = "none";
+
+const create = () => {
+  container.style.display = "flex";
+  document.body.style.overflow = "hidden";
+};
+
+const closeForm = () => {
+  container.style.display = "none";
+  document.body.style.overflow = "auto";
+};
+
+container.addEventListener("click", (e) => {
+  if (e.target === container) {
+    closeForm();
+  }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   const url = "http://localhost:3000";
   const saleTypeSelect = document.getElementById("sale-type");
@@ -93,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
-        const info = document.getElementById("saved");
+        const info = document.getElementById("info");
         const toast = document.createElement("div");
         toast.classList.add("toast");
         toast.innerHTML = `<p>${data.message}</p>`;
@@ -103,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 2000);
         displaySales();
         salesForm.reset();
+        closeForm();
       })
       .catch((error) => {
         console.error("Error saving sale:", error);

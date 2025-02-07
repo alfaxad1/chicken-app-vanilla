@@ -1,3 +1,22 @@
+const container = document.getElementById("container");
+container.style.display = "none";
+
+const create = () => {
+  container.style.display = "flex";
+  document.body.style.overflow = "hidden";
+};
+
+const closeForm = () => {
+  container.style.display = "none";
+  document.body.style.overflow = "auto";
+};
+
+container.addEventListener("click", (e) => {
+  if (e.target === container) {
+    closeForm();
+  }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   const url = "http://localhost:3000";
   const form = document.getElementById("egg-collection-form");
@@ -25,8 +44,18 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((response) => response.json())
       .then((data) => {
-        alert("Collection recorded successfully");
+        console.log(data.message);
+        const info = document.getElementById("info");
+        const toast = document.createElement("div");
+        toast.classList.add("toast");
+        toast.innerHTML = `<p>${data.message}</p>`;
+        info.appendChild(toast);
+        setTimeout(() => {
+          toast.remove();
+        }, 2000);
+
         form.reset();
+        closeForm();
         displayCollectionHistory();
         updateChart();
       })
@@ -65,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                   collection.damaged_eggs
                                 }</td>
                                 <td>
-                                    <button onclick="deleteCollection(${
+                                    <button class="delete-btn" onclick="deleteCollection(${
                                       collection.id
                                     })">Delete</button>
                                 </td>
@@ -146,6 +175,15 @@ document.addEventListener("DOMContentLoaded", function () {
       })
         .then((response) => response.json())
         .then((data) => {
+          const info = document.getElementById("info");
+          const toast = document.createElement("div");
+          toast.classList.add("toast");
+          toast.innerHTML = `<p>${data.message}</p>`;
+          info.appendChild(toast);
+          setTimeout(() => {
+            toast.remove();
+          }, 2000);
+
           displayCollectionHistory();
           updateChart();
         })

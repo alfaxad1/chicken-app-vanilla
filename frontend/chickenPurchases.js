@@ -1,3 +1,22 @@
+const container = document.getElementById("container");
+container.style.display = "none";
+
+const create = () => {
+  container.style.display = "flex";
+  document.body.style.overflow = "hidden";
+};
+
+const closeForm = () => {
+  container.style.display = "none";
+  document.body.style.overflow = "auto";
+};
+
+container.addEventListener("click", (e) => {
+  if (e.target === container) {
+    closeForm();
+  }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   const url = "http://localhost:3000";
   const chickenPurchasesForm = document.getElementById("chickenPurchases-form");
@@ -43,8 +62,18 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Saved:", data.message);
-        displayPurchases(); // Refresh the list of purchases
+        console.log(data.message);
+        const info = document.getElementById("info");
+        const toast = document.createElement("div");
+        toast.classList.add("toast");
+        toast.innerHTML = `<p>${data.message}</p>`;
+        info.appendChild(toast);
+        setTimeout(() => {
+          toast.remove();
+        }, 2000);
+
+        closeForm();
+        displayPurchases();
         chickenPurchasesForm.reset(); // Reset the form fields
       })
       .catch((error) => console.error("Error:", error));

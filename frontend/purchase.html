@@ -16,13 +16,48 @@
         padding: 20px;
         color: #333;
       }
+
       .container {
-        max-width: 1200px;
+        max-width: 800px;
         margin: 0 auto;
         background-color: #fff;
         padding: 30px;
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+        /* New styles for pop-out effect */
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px; /* Smaller width */
+        max-height: 80vh; /* Limit height */
+        overflow-y: auto; /* Scroll if content is too long */
+        z-index: 1000;
+        animation: popIn 0.3s ease-out;
+      }
+
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.7);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+
+      .container::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
       }
       h3 {
         color: #2c3e50;
@@ -91,7 +126,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: #50f877f7;
+        background-color: #27ae60;
         font-size: medium;
         font-weight: 600;
         color: #fff;
@@ -103,9 +138,10 @@
     </style>
   </head>
   <body>
-    <div class="container">
-      <a href="dashboard.html"><button class="butt">Home</button></a>
-      <h3 id="purchase-title">Purchases</h3>
+    <a href="dashboard.html"><button class="butt">Home</button></a>
+    <button id="create-btn" onclick="create()">Create</button>
+    <h3 id="purchase-title">Purchases</h3>
+    <div class="container" id="container">
       <form id="purchase-form">
         <div id="purchase-fields">
           <div>
@@ -134,15 +170,15 @@
             <label for="purchase-date">Date:</label>
             <input type="date" id="purchase-date" required />
           </div>
-          <button type="submit">Save Purchase</button>
+          <button type="submit">Save</button>
+          <button onclick="closeForm()">Close</button>
         </div>
       </form>
-      <div id="info"></div>
-      <div id="saved"></div>
-      <h3>Saved Purchases</h3>
-      <div id="purchases-data">
-        <!-- Saved purchases data will be displayed here -->
-      </div>
+    </div>
+    <div id="info"></div>
+    <h3>Saved Purchases</h3>
+    <div id="purchases-data">
+      <!-- Saved purchases data will be displayed here -->
     </div>
 
     <script src="purchases.js"></script>
@@ -153,8 +189,7 @@
         window.location.href = "login.html";
       }
       if (user.role !== "admin" && user.role !== "superadmin") {
-        window.document.getElementById("purchase-fields").remove();
-        window.document.getElementById("purchase-title").remove();
+        window.document.getElementById("create-btn").remove();
       }
     </script>
   </body>
