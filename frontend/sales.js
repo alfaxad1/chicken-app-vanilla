@@ -147,12 +147,14 @@ document.addEventListener("DOMContentLoaded", function () {
           return;
         }
 
-        // Clear previous content
-        salesData.innerHTML = "";
-
-        // Create table structure
-        const table = document.createElement("table");
-        table.innerHTML = `
+        salesData.innerHTML = `
+         <input
+        id="search-bar"
+        class="fas fa-search"
+        placeholder="search"
+        type="text"
+      />
+              <table>
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -165,55 +167,42 @@ document.addEventListener("DOMContentLoaded", function () {
                     </tr>
                 </thead>
                 <tbody id="sales-table-body"></tbody>
+              </table>
             `;
-        salesData.appendChild(table);
 
-        // Get table body
+        searchBar = document.getElementById("search-bar");
         const tableBody = document.getElementById("sales-table-body");
 
-        // Ensure table body exists
-        if (!tableBody) {
-          console.error("Sales table body not found");
-          return;
-        }
+        const renderTable = (filteredSales) => {
+          tableBody.innerHTML = "";
 
-        // Check if sales array is empty
-        if (sales.length === 0) {
-          tableBody.innerHTML = `
-                    <tr>
-                        <td colspan="7" style="text-align: center;">No sales recorded yet.</td>
-                    </tr>
-                `;
-          return;
-        }
+          filteredSales.forEach((sale) => {
+            const row = document.createElement("tr");
 
-        // Populate table with sales data
-        sales.forEach((sale) => {
-          const row = document.createElement("tr");
+            // Format the date
+            const formattedDate = sale.date
+              ? new Date(sale.date).toLocaleDateString()
+              : "N/A";
 
-          // Format the date
-          const formattedDate = sale.date
-            ? new Date(sale.date).toLocaleDateString()
-            : "N/A";
+            // Determine sale type and quantity
+            const saleType = sale.chicken_type || "Eggs";
+            const quantity =
+              sale.number_of_pieces || sale.quantity_sold || "N/A";
+            const pricePerUnit =
+              sale.price_per_piece || sale.price_per_unit || "N/A";
 
-          // Determine sale type and quantity
-          const saleType = sale.chicken_type || "Eggs";
-          const quantity = sale.number_of_pieces || sale.quantity_sold || "N/A";
-          const pricePerUnit =
-            sale.price_per_piece || sale.price_per_unit || "N/A";
-
-          //logic to remove the actions column when the user is not an admin
-          let actions = `
+            //logic to remove the actions column when the user is not an admin
+            let actions = `
                     <td class="action-buttons">
                         <button class="edit-btn" onclick="enableEditingSale(${sale.id})">Edit</button>
                         <button class="delete-btn" onclick="deleteSale(${sale.id})">Delete</button>
                     </td>`;
-          const user = JSON.parse(localStorage.getItem("user"));
-          if (user.role !== "admin" && user.role !== "superadmin") {
-            actions = `<td></td>`;
-          }
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (user.role !== "admin" && user.role !== "superadmin") {
+              actions = `<td></td>`;
+            }
 
-          row.innerHTML = `
+            row.innerHTML = `
                     <td>${formattedDate}</td>
                     <td>${sale.customer_id || "N/A"}</td>
                     <td>${saleType}</td>
@@ -223,7 +212,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${actions}</td>
                 `;
 
-          tableBody.appendChild(row);
+            tableBody.appendChild(row);
+          });
+        };
+        renderTable(sales);
+        searchBar.addEventListener("keyup", (e) => {
+          const searchString = e.target.value.toLowerCase();
+          const filteredSales = sales.filter((sale) => {
+            return sale.customer_id.toLowerCase().includes(searchString);
+          });
+          renderTable(filteredSales);
         });
       })
       .catch((error) => {
