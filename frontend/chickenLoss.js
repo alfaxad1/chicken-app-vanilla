@@ -94,6 +94,8 @@ document.addEventListener("DOMContentLoaded", function () {
           filteredChickenLosses.forEach((chickenLoss) => {
             let actions = `
             <td class="action-buttons">
+               <button class="edit-btn" onclick="enableEditingLoss(${chickenLoss.id})">Edit</button>
+               <button id="save-btn-loss-${chickenLoss.id}" onclick="saveLoss(${chickenLoss.id})" style="display:none;">Save</button>
                <button class="delete-btn" onclick="deleteChickenLoss(${chickenLoss.id})">
                     Delete
               </button>
@@ -107,10 +109,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const row = document.createElement("tr");
             row.innerHTML = `
-        <td>${chickenLoss.chicken_type}</td>
-        <td>${chickenLoss.number}</td>
-        <td>${chickenLoss.cause}</td>
-        <td>${chickenLoss.date.split("T")[0]}</td>
+        <td><input type="text" id="chicken-type-${chickenLoss.id}" value="${
+              chickenLoss.chicken_type
+            }" disabled></td>
+        <td><input type="number" id="number-${chickenLoss.id}" value="${
+              chickenLoss.number
+            }" disabled></td>
+        <td><input type="text" id="cause-${chickenLoss.id}" value="${
+              chickenLoss.cause
+            }" disabled></td>
+        <td><input type="date" id="date-${chickenLoss.id}" value="${
+              chickenLoss.date.split("T")[0]
+            }" disabled></td>
         ${actions}
       `;
 
@@ -136,6 +146,35 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   };
   fetchChikenLosses();
+
+  window.enableEditingLoss = function (id) {
+    document.getElementById(`chicken-type-${id}`).disabled = false;
+    document.getElementById(`cause-${id}`).disabled = false;
+    document.getElementById(`number-${id}`).disabled = false;
+    document.getElementById(`date-${id}`).disabled = false;
+    document.getElementById(`save-btn-loss-${id}`).style.display = "inline";
+  };
+
+  window.saveLoss = function (id) {
+    const chickenType = document.getElementById(`chicken-type-${id}`).value;
+    const cause = document.getElementById(`cause-${id}`).value;
+    const number = document.getElementById(`number-${id}`).value;
+    const date = document.getElementById(`date-${id}`).value;
+
+    fetch(`${url}/api/chicken-loss/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chickenType, cause, number, date }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        fetchChikenLosses();
+      })
+      .catch((error) => {
+        console.log("Error saving", error);
+      });
+  };
 
   window.deleteChickenLoss = function (id) {
     const confirmed = confirm("Are you sure you want to delete");

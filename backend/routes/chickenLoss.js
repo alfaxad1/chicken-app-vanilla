@@ -24,6 +24,21 @@ router.get("/", (req, res) => {
   });
 });
 
+router.put("/:id", (req, res) => {
+  const { chickenType, cause, number, date } = req.body;
+  const { id } = req.params;
+  const query =
+    "UPDATE chicken_loss SET chicken_type = ?, cause = ?, number = ?, date = ? WHERE id = ?";
+  connection.query(
+    query,
+    [chickenType, cause, number, date, id],
+    (err, result) => {
+      if (err) throw err;
+      res.json({ message: "Loss updated successfully" });
+    }
+  );
+});
+
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
   const query = `DELETE FROM chicken_loss WHERE id = ?`;

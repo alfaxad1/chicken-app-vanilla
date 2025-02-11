@@ -119,9 +119,9 @@ document.addEventListener("DOMContentLoaded", function () {
             //logic to remove the actions column when the user is not an admin
             let actions = `
                       <td>
-                          <button onclick="enableEditing(${purchase.id})">Edit</button>
-                          <button onclick="deletePurchase(${purchase.id})">Delete</button>
+                          <button class="edit-btn" onclick="enableEditing(${purchase.id})">Edit</button>
                           <button id="save-btn-${purchase.id}" style="display:none;" onclick="savePurchase(${purchase.id})">Save</button>
+                          <button class="delete-btn" onclick="deletePurchase(${purchase.id})">Delete</button>                          
                       </td>`;
             const user = JSON.parse(localStorage.getItem("user"));
             if (user.role !== "admin" && user.role !== "superadmin") {
@@ -129,12 +129,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             row.innerHTML = `
-                        <td><input type="text" value="${purchase.supplier_id}" disabled></td>
-                        <td><input type="text" value="${purchase.chicken_type}" disabled></td>
-                        <td><input type="number" value="${purchase.price_per_piece}" disabled></td>
-                        <td><input type="number" value="${purchase.no_of_pieces}" disabled></td>
-                        <td><input type="number" value="${purchase.total_price}" disabled></td>
-                        <td><input type="date" value="${purchase.purchase_date}" disabled></td>
+                        <td><input type="text" id="supplier-id-${purchase.id}" value="${purchase.supplier_id}" disabled></td>
+                        <td><input type="text" id="type-of-chicken-${purchase.id}" value="${purchase.chicken_type}" disabled></td>
+                        <td><input type="number" id="price-per-piece-${purchase.id}" value="${purchase.price_per_piece}" disabled></td>
+                        <td><input type="number" id="number-of-pieces-${purchase.id}" value="${purchase.no_of_pieces}" disabled></td>
+                        <td><input type="number" id="total-price-${purchase.id}" value="${purchase.total_price}" disabled></td>
+                        <td><input type="date" id="purchase-date-${purchase.id}" value="${purchase.purchase_date}" disabled></td>
                         ${actions}
                       `;
             tableBody.appendChild(row);
@@ -158,31 +158,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Enable editing of a purchase record
   window.enableEditing = function (id) {
-    const inputs = document.querySelectorAll(`#purchases-table-body input`);
-    inputs.forEach((input) => (input.disabled = false));
+    document.getElementById(`supplier-id-${id}`).disabled = false;
+    document.getElementById(`type-of-chicken-${id}`).disabled = false;
+    document.getElementById(`price-per-piece-${id}`).disabled = false;
+    document.getElementById(`number-of-pieces-${id}`).disabled = false;
+    document.getElementById(`total-price-${id}`).disabled = false;
+    document.getElementById(`purchase-date-${id}`).disabled = false;
     document.getElementById(`save-btn-${id}`).style.display = "inline";
   };
 
   // Save the edited purchase record
   window.savePurchase = function (id) {
-    const supplierId = document.querySelector(
-      `#purchases-table-body input:nth-child(1)`
-    ).value;
-    const chickenType = document.querySelector(
-      `#purchases-table-body input:nth-child(2)`
-    ).value;
-    const price = parseFloat(
-      document.querySelector(`#purchases-table-body input:nth-child(3)`).value
-    );
-    const pieces = parseInt(
-      document.querySelector(`#purchases-table-body input:nth-child(4)`).value
-    );
-    const total = parseFloat(
-      document.querySelector(`#purchases-table-body input:nth-child(5)`).value
-    );
-    const date = document.querySelector(
-      `#purchases-table-body input:nth-child(6)`
-    ).value;
+    const supplierId = document.getElementById(`supplier-id-${id}`).value;
+    const chickenType = document.getElementById(`type-of-chicken-${id}`).value;
+    const price = document.getElementById(`price-per-piece-${id}`).value;
+    const pieces = document.getElementById(`number-of-pieces-${id}`).value;
+    const total = document.getElementById(`total-price-${id}`).value;
+    const date = document.getElementById(`purchase-date-${id}`).value;
 
     fetch(`${url}/api/chicken-purchases/${id}`, {
       method: "PUT",
