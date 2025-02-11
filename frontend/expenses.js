@@ -58,20 +58,21 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
-  let page = 1;
-  const postPerPage = 5;
-
   function displayExpenses() {
-    const skip = (page - 1) * postPerPage;
-    fetch(`${url}/api/expenses?limit=${postPerPage}&skip=${skip}`)
+    fetch(`${url}/api/expenses`)
       .then((response) => response.json())
       .then((expenses) => {
         if (expenses.length === 0) {
           expensesData.innerHTML = "<p>No expenses recorded yet.</p>";
           return;
         }
-
         expensesData.innerHTML = `
+        <input
+        id="search-bar"
+        class="fas fa-search"
+        placeholder="search"
+        type="text"
+      />
           <table>
             <thead>
               <tr>
@@ -85,38 +86,56 @@ document.addEventListener("DOMContentLoaded", function () {
           </table>
         `;
 
-        const tableBody = document.getElementById("expenses-table-body");
+        //search bar implementation
+        let filteredExpenses = [];
 
-        expenses.forEach((expense) => {
-          //logic to remove the actions column when the user is not an admin
-          let actions = `
+        searchBar = document.getElementById("search-bar");
+        const tableBody = document.getElementById("expenses-table-body");
+        const renderTable = (filteredExpenses) => {
+          tableBody.innerHTML = "";
+
+          filteredExpenses.forEach((expense) => {
+            //logic to remove the actions column when the user is not an admin
+            let actions = `
           <td class="action-buttons">
             <button class="edit-btn" onclick="enableEditingExpense(${expense.id})">Edit</button>
             <button id="save-btn-expense-${expense.id}" onclick="saveExpense(${expense.id})" style="display:none;">Save</button>
             <button class="delete-btn" onclick="deleteExpense(${expense.id})">Delete</button>
           </td>`;
 
-          const user = JSON.parse(localStorage.getItem("user"));
-          if (user.role !== "admin" && user.role !== "superadmin") {
-            actions = `<td></td>`;
-          }
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (user.role !== "admin" && user.role !== "superadmin") {
+              actions = `<td></td>`;
+            }
 
-          const row = document.createElement("tr");
-          row.innerHTML = `
+            const row = document.createElement("tr");
+            row.innerHTML = `
             <td><input type="text" id="expense-type-${expense.id}" value="${
-            expense.Type
-          }" disabled></td>
+              expense.Type
+            }" disabled></td>
             <td><input type="number" id="expense-cost-${expense.id}" value="${
-            expense.Price
-          }" disabled></td>
+              expense.Price
+            }" disabled></td>
             <td><input type="date" id="expense-date-${expense.id}" value="${
-            expense.Date.split("T")[0]
-          }" disabled></td>
+              expense.Date.split("T")[0]
+            }" disabled></td>
           ${actions}
             `;
-          tableBody.appendChild(row);
+            tableBody.appendChild(row);
+          });
+        };
+
+        renderTable(expenses);
+
+        searchBar.addEventListener("keyup", (e) => {
+          const searchString = e.target.value;
+          const filteredExpenses = expenses.filter((expense) => {
+            return expense.Type.includes(searchString);
+          });
+          renderTable(filteredExpenses);
         });
       })
+
       .catch((error) => {
         console.error("Error fetching expenses:", error);
         expensesData.innerHTML =

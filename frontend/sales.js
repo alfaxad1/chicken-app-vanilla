@@ -18,7 +18,7 @@ container.addEventListener("click", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const url = "http://localhost:3000";
+  const url = "https://chickenproject.ajiambojackychicken.com";
   const saleTypeSelect = document.getElementById("sale-type");
   const chickenSaleFields = document.getElementById("chicken-sale-fields");
   const eggsSaleFields = document.getElementById("eggs-sale-fields");

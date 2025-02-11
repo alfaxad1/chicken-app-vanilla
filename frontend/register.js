@@ -7,7 +7,7 @@ document
     const password = document.getElementById("password").value;
     const role = document.getElementById("role").value.toLowerCase();
 
-    const url = "http://localhost:3000";
+    const url = "https://chickenproject.ajiambojackychicken.com";
 
     fetch(`${url}/api/users/register`, {
       method: "POST",

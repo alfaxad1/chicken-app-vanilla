@@ -216,7 +216,7 @@
         </div>
       </div>
 
-      <div class="stats-container">
+      <div id="stats" class="stats-container cards-grid">
         <div id="bought"></div>
         <div id="losses"></div>
         <div id="sold"></div>
@@ -233,6 +233,7 @@
       }
       if (user.role !== "admin" && user.role !== "superadmin") {
         window.document.getElementById("report-card").remove();
+        window.document.getElementById("stats").remove();
       }
     </script>
     <script src="calculation.js"></script>

@@ -8,7 +8,7 @@ document
 
     const url = "http://localhost:3000";
 
-    fetch(`${url}/api/users/login `, {
+    fetch(`${url}/api/users/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password }),
