@@ -18,7 +18,7 @@ container.addEventListener("click", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const url = "https://chickenproject.ajiambojackychicken.com";
+  const url = "http://localhost:3000";
   const saleTypeSelect = document.getElementById("sale-type");
   const chickenSaleFields = document.getElementById("chicken-sale-fields");
   const eggsSaleFields = document.getElementById("eggs-sale-fields");
@@ -195,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let actions = `
                     <td class="action-buttons">
                         <button class="edit-btn" onclick="enableEditingSale(${sale.id})">Edit</button>
+                        <button id="save-btn-sale-${sale.id}" onclick="saveSale(${sale.id})" style="display:none;">Save</button>
                         <button class="delete-btn" onclick="deleteSale(${sale.id})">Delete</button>
                     </td>`;
             const user = JSON.parse(localStorage.getItem("user"));
@@ -203,12 +204,24 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             row.innerHTML = `
-                    <td>${formattedDate}</td>
-                    <td>${sale.customer_id || "N/A"}</td>
-                    <td>${saleType}</td>
-                    <td>${quantity}</td>
-                    <td>${pricePerUnit}</td>
-                    <td>${sale.total_price || "N/A"}</td>
+                    <td><input type="date" id="sale-date-${
+                      sale.id
+                    }" value="${formattedDate}" disabled></td>
+                    <td><input type="text" id="customer-id-${sale.id}" value="${
+              sale.customer_id || "N/A"
+            }" disabled></td>
+                    <td><input type="text" id="sale-type-${
+                      sale.id
+                    }" value="${saleType}" disabled></td>
+                    <td><input type="text" id="sale-quantity-${
+                      sale.id
+                    }" value="${quantity}" disabled></td>
+                    <td><input type="text" id="sale-price-${
+                      sale.id
+                    }" value="${pricePerUnit}" disabled></td>
+                    <td><input type="text" id="sale-total-${sale.id}" value="${
+              sale.total_price || "N/A"
+            }" disabled></td>
                     <td>${actions}</td>
                 `;
 
@@ -240,7 +253,52 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("DOMContentLoaded", displaySales);
 
   window.enableEditingSale = function (id) {
-    // Implement editing functionality here
+    document.getElementById(`sale-date-${id}`).disabled = false;
+    document.getElementById(`customer-id-${id}`).disabled = false;
+    document.getElementById(`sale-type-${id}`).disabled = false;
+    document.getElementById(`sale-quantity-${id}`).disabled = false;
+    document.getElementById(`sale-price-${id}`).disabled = false;
+    document.getElementById(`sale-total-${id}`).disabled = false;
+    document.getElementById(`save-btn-sale-${id}`).style.display = "inline";
+  };
+
+  window.saveSale = function (id) {
+    const saleDate = document.getElementById(`sale-date-${id}`).value;
+    const customerId = document.getElementById(`customer-id-${id}`).value;
+    const saleType = document.getElementById(`sale-type-${id}`).value;
+    const quantity = document.getElementById(`sale-quantity-${id}`).value;
+    const pricePerUnit = document.getElementById(`sale-price-${id}`).value;
+    const totalPrice = document.getElementById(`sale-total-${id}`).value;
+
+    fetch(`${url}/api/sales/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        saleDate,
+        customerId,
+        saleType,
+        quantity,
+        pricePerUnit,
+        totalPrice,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message);
+        displaySales();
+        const info = document.getElementById("info");
+        const toast = document.createElement("div");
+        toast.classList.add("toast");
+        toast.innerHTML = `<p>${data.message}</p>`;
+        info.appendChild(toast);
+        setTimeout(() => {
+          toast.remove();
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error("Error saving sale:", error);
+        displaySales();
+      });
   };
 
   window.deleteSale = function (id) {

@@ -76,14 +76,15 @@ router.get("/", (request, response) => {
 
 router.put("/:id", (request, response) => {
   const { id } = request.params;
-  const { customer_id, quantity_sold, price, date } = request.body;
+  const { saleDate, customerId, saleType, quantity, pricePerUnit, totalPrice } =
+    request.body;
 
   const query =
-    "UPDATE sales SET customer_id = ?, quantity_sold = ?, price = ?, date = ? WHERE id = ?";
+    "UPDATE sales SET date = ?, customer_id = ?, sale_type = ?, quantity_sold = ?, price_per_unit = ?, total_price = ? WHERE id = ?";
 
   connection.query(
     query,
-    [customer_id, quantity_sold, price, date, id],
+    [saleDate, customerId, saleType, quantity, pricePerUnit, totalPrice, id],
     (err, result) => {
       if (err) {
         return response.status(500).json({ error: err.message });

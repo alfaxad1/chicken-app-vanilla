@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const url = "https://chickenproject.ajiambojackychicken.com";
+  const url = "http://localhost:3000";
 
   fetch(`${url}/api/profits`, {
     method: "GET",

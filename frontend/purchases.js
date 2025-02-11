@@ -18,7 +18,7 @@ container.addEventListener("click", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const url = "https://chickenproject.ajiambojackychicken.com";
+  const url = "http://localhost:3000";
   const purchaseForm = document.getElementById("purchase-form");
   const purchasesData = document.getElementById("purchases-data");
 
@@ -95,9 +95,9 @@ document.addEventListener("DOMContentLoaded", function () {
             //logic to remove the actions column when the user is not an admin
             let actions = `
               <td class="action-buttons" id="purchase-actions">
-                <button onclick="enableEditingPurchase(${purchase.id})">Edit</button>
-                <button id="save-btn-purchase-${purchase.id}" onclick="savePurchase(${purchase.id})" style="display:none;">Save</button>
-                <button id="delete-btn-purchase-${purchase.id}" onclick="deletePurchase(${purchase.id})">Delete</button>
+                <button class="edit-btn" onclick="enableEditingPurchase(${purchase.id})">Edit</button>
+                <button class="save-btn"id="save-btn-purchase-${purchase.id}" onclick="savePurchase(${purchase.id})" style="display:none;">Save</button>
+                <button class="delete-btn" id="delete-btn-purchase-${purchase.id}" onclick="deletePurchase(${purchase.id})">Delete</button>
               </td>`;
             const user = JSON.parse(localStorage.getItem("user"));
             if (user.role !== "admin" && user.role !== "superadmin") {
@@ -136,15 +136,17 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   window.savePurchase = function (id) {
-    const product = document.getElementById(`purchase-product-${id}`).value;
+    const product_name = document.getElementById(
+      `purchase-product-${id}`
+    ).value;
     const quantity = document.getElementById(`purchase-quantity-${id}`).value;
     const price = document.getElementById(`purchase-price-${id}`).value;
-    const date = document.getElementById(`purchase-date-${id}`).value;
+    const purchase_date = document.getElementById(`purchase-date-${id}`).value;
 
     fetch(`${url}/api/purchases/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ product, quantity, price, date }),
+      body: JSON.stringify({ product_name, quantity, price, purchase_date }),
     })
       .then((response) => response.json())
       .then((data) => {

@@ -107,9 +107,19 @@
       }
       th,
       td {
-        padding: 12px;
+        padding: 4px;
         text-align: left;
         border-bottom: 1px solid #e0e0e0;
+      }
+      td input:disabled {
+        background-color: #f8f9fa;
+        border: 1px solid transparent;
+      }
+      td input {
+        border: 1px solid #ddd;
+        padding: 8px;
+        border-radius: 4px;
+        width: 90%;
       }
       th {
         background-color: #f2f2f2;
@@ -119,7 +129,20 @@
         background-color: #f9f9f9;
       }
       .action-buttons button {
-        margin-right: 5px;
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+      .delete-btn {
+        background-color: #e74c3c;
+      }
+      .delete-btn:hover {
+        background-color: #c0392b;
+      }
+      .edit-btn {
+        background-color: #f39c12;
+      }
+      .edit-btn:hover {
+        background-color: #d35400;
       }
       .toast {
         position: fixed;
