@@ -62,6 +62,12 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((purchases) => {
         purchasesData.innerHTML = `
+        <input
+        id="search-bar"
+        class="fas fa-search"
+        placeholder="search"
+        type="text"
+      />
             <table>
               <thead>
                 <tr>
@@ -76,31 +82,46 @@ document.addEventListener("DOMContentLoaded", function () {
             </table>
           `;
 
+        //search bar implementation
+        searchBar = document.getElementById("search-bar");
         const tableBody = document.getElementById("purchases-table-body");
 
-        purchases.forEach((purchase) => {
-          const row = document.createElement("tr");
+        const renderTable = (filteredPurchases) => {
+          tableBody.innerHTML = "";
 
-          //logic to remove the actions column when the user is not an admin
-          let actions = `
+          filteredPurchases.forEach((purchase) => {
+            const row = document.createElement("tr");
+
+            //logic to remove the actions column when the user is not an admin
+            let actions = `
               <td class="action-buttons" id="purchase-actions">
                 <button onclick="enableEditingPurchase(${purchase.id})">Edit</button>
                 <button id="save-btn-purchase-${purchase.id}" onclick="savePurchase(${purchase.id})" style="display:none;">Save</button>
                 <button id="delete-btn-purchase-${purchase.id}" onclick="deletePurchase(${purchase.id})">Delete</button>
               </td>`;
-          const user = JSON.parse(localStorage.getItem("user"));
-          if (user.role !== "admin" && user.role !== "superadmin") {
-            actions = `<td></td>`;
-          }
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (user.role !== "admin" && user.role !== "superadmin") {
+              actions = `<td></td>`;
+            }
 
-          row.innerHTML = `
+            row.innerHTML = `
               <td><input type="text" id="purchase-product-${purchase.id}" value="${purchase.product_name}" disabled></td>
               <td><input type="number" id="purchase-quantity-${purchase.id}" value="${purchase.quantity}" disabled></td>
               <td><input type="number" id="purchase-price-${purchase.id}" value="${purchase.price}" disabled></td>
               <td><input type="date" id="purchase-date-${purchase.id}" value="${purchase.purchase_date}" disabled></td>
               ${actions}
                `;
-          tableBody.appendChild(row);
+            tableBody.appendChild(row);
+          });
+        };
+        renderTable(purchases);
+
+        searchBar.addEventListener("keyup", (e) => {
+          const searchString = e.target.value.toLowerCase();
+          const filteredPurchases = purchases.filter((purchase) => {
+            return purchase.product_name.toLowerCase().includes(searchString);
+          });
+          renderTable(filteredPurchases);
         });
       })
       .catch((error) => console.error("Error fetching purchases:", error));

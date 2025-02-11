@@ -87,8 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
 
         //search bar implementation
-        let filteredExpenses = [];
-
         searchBar = document.getElementById("search-bar");
         const tableBody = document.getElementById("expenses-table-body");
         const renderTable = (filteredExpenses) => {
@@ -128,9 +126,9 @@ document.addEventListener("DOMContentLoaded", function () {
         renderTable(expenses);
 
         searchBar.addEventListener("keyup", (e) => {
-          const searchString = e.target.value;
+          const searchString = e.target.value.toLowerCase();
           const filteredExpenses = expenses.filter((expense) => {
-            return expense.Type.includes(searchString);
+            return expense.Type.toLowerCase().includes(searchString);
           });
           renderTable(filteredExpenses);
         });
