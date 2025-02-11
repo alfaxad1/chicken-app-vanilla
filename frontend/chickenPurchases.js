@@ -86,6 +86,12 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((purchases) => {
         console.log(purchases);
         chickenPurchasesData.innerHTML = `
+          <input
+        id="search-bar"
+        class="fas fa-search"
+        placeholder="search"
+        type="text"
+      />
                     <table>
                         <thead>
                             <tr>
@@ -101,25 +107,28 @@ document.addEventListener("DOMContentLoaded", function () {
                         <tbody id="purchases-table-body"></tbody>
                     </table>
                 `;
-
+        //search bar implementation
+        searchBar = document.getElementById("search-bar");
         const tableBody = document.getElementById("purchases-table-body");
 
-        purchases.forEach((purchase) => {
-          const row = document.createElement("tr");
+        const renderTable = (filteredPurchases) => {
+          tableBody.innerHTML = "";
+          filteredPurchases.forEach((purchase) => {
+            const row = document.createElement("tr");
 
-          //logic to remove the actions column when the user is not an admin
-          let actions = `
+            //logic to remove the actions column when the user is not an admin
+            let actions = `
                       <td>
                           <button onclick="enableEditing(${purchase.id})">Edit</button>
                           <button onclick="deletePurchase(${purchase.id})">Delete</button>
                           <button id="save-btn-${purchase.id}" style="display:none;" onclick="savePurchase(${purchase.id})">Save</button>
                       </td>`;
-          const user = JSON.parse(localStorage.getItem("user"));
-          if (user.role !== "admin" && user.role !== "superadmin") {
-            actions = `<td></td>`;
-          }
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (user.role !== "admin" && user.role !== "superadmin") {
+              actions = `<td></td>`;
+            }
 
-          row.innerHTML = `
+            row.innerHTML = `
                         <td><input type="text" value="${purchase.supplier_id}" disabled></td>
                         <td><input type="text" value="${purchase.chicken_type}" disabled></td>
                         <td><input type="number" value="${purchase.price_per_piece}" disabled></td>
@@ -128,7 +137,20 @@ document.addEventListener("DOMContentLoaded", function () {
                         <td><input type="date" value="${purchase.purchase_date}" disabled></td>
                         ${actions}
                       `;
-          tableBody.appendChild(row);
+            tableBody.appendChild(row);
+          });
+        };
+        renderTable(purchases);
+
+        searchBar.addEventListener("keyup", (e) => {
+          const searchString = e.target.value.toLowerCase();
+          const filteredPurchases = purchases.filter((purchase) => {
+            return (
+              purchase.supplier_id.toLowerCase().includes(searchString) ||
+              purchase.chicken_type.toLowerCase().includes(searchString)
+            );
+          });
+          renderTable(filteredPurchases);
         });
       })
       .catch((error) => console.error("Error:", error));

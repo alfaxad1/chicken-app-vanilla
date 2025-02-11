@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cause = document.getElementById("cause").value;
     const number = document.getElementById("number").value;
     const date = document.getElementById("date").value;
+
     const saveChickenLoss = () => {
       fetch(`${url}/api/chicken-loss`, {
         method: "POST",
@@ -64,6 +65,12 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((chickenLosses) => {
         console.log(chickenLosses);
         lossData.innerHTML = `
+        <input
+        id="search-bar"
+        class="fas fa-search"
+        placeholder="search"
+        type="text"
+      />
         <table>
            <thead>
               <tr>
@@ -77,11 +84,15 @@ document.addEventListener("DOMContentLoaded", function () {
             <tbody id="chicken-loss-table-body"></tbody>
         </table>
       `;
-
+        //search bar implementation
+        searchBar = document.getElementById("search-bar");
         const tableBody = document.getElementById("chicken-loss-table-body");
 
-        chickenLosses.forEach((chickenLoss) => {
-          let actions = `
+        const renderTable = (filteredChickenLosses) => {
+          tableBody.innerHTML = "";
+
+          filteredChickenLosses.forEach((chickenLoss) => {
+            let actions = `
             <td class="action-buttons">
                <button class="delete-btn" onclick="deleteChickenLoss(${chickenLoss.id})">
                     Delete
@@ -89,13 +100,13 @@ document.addEventListener("DOMContentLoaded", function () {
             </td>
         `;
 
-          const user = JSON.parse(localStorage.getItem("user"));
-          if (user.role !== "admin" && user.role !== "superadmin") {
-            actions = `<td></td>`;
-          }
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (user.role !== "admin" && user.role !== "superadmin") {
+              actions = `<td></td>`;
+            }
 
-          const row = document.createElement("tr");
-          row.innerHTML = `
+            const row = document.createElement("tr");
+            row.innerHTML = `
         <td>${chickenLoss.chicken_type}</td>
         <td>${chickenLoss.number}</td>
         <td>${chickenLoss.cause}</td>
@@ -103,7 +114,21 @@ document.addEventListener("DOMContentLoaded", function () {
         ${actions}
       `;
 
-          tableBody.appendChild(row);
+            tableBody.appendChild(row);
+          });
+        };
+
+        renderTable(chickenLosses);
+
+        searchBar.addEventListener("keyup", (e) => {
+          const searchString = e.target.value.toLowerCase();
+          const filteredChickenLosses = chickenLosses.filter((chickenLoss) => {
+            return (
+              chickenLoss.cause.toLowerCase().includes(searchString) ||
+              chickenLoss.chicken_type.toLowerCase().includes(searchString)
+            );
+          });
+          renderTable(filteredChickenLosses);
         });
       })
       .catch((error) => {
