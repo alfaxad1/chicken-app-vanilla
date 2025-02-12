@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const expensesForm = document.getElementById("expenses-form");
   const expensesData = document.getElementById("expenses-data");
 
+  let currentPage = 0;
+  const recordsPerPage = 5;
   // Handle expenses form submission
   expensesForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -84,15 +86,21 @@ document.addEventListener("DOMContentLoaded", function () {
             </thead>
             <tbody id="expenses-table-body"></tbody>
           </table>
+          <button id="prev-button" style="display: none;"><</button>
+          <button id="next-button">></button>
         `;
+        const prevButton = document.getElementById("prev-button");
 
+        const nextButton = document.getElementById("next-button");
         //search bar implementation
         searchBar = document.getElementById("search-bar");
         const tableBody = document.getElementById("expenses-table-body");
         const renderTable = (filteredExpenses) => {
           tableBody.innerHTML = "";
-
-          filteredExpenses.forEach((expense) => {
+          const start = currentPage * recordsPerPage;
+          const end = start + recordsPerPage;
+          const paginatedExpenses = filteredExpenses.slice(start, end);
+          paginatedExpenses.forEach((expense) => {
             //logic to remove the actions column when the user is not an admin
             let actions = `
           <td class="action-buttons">
@@ -121,6 +129,11 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
             tableBody.appendChild(row);
           });
+          // Disable the next button if there are no more records
+          nextButton.style.display =
+            end >= filteredExpenses.length ? "none" : "inline";
+          // Disable the previous button if on the first page
+          prevButton.style.display = currentPage === 0 ? "none" : "inline";
         };
 
         renderTable(expenses);
@@ -131,6 +144,16 @@ document.addEventListener("DOMContentLoaded", function () {
             return expense.Type.toLowerCase().includes(searchString);
           });
           renderTable(filteredExpenses);
+        });
+        nextButton.addEventListener("click", () => {
+          currentPage++;
+          renderTable(expenses);
+        });
+        prevButton.addEventListener("click", () => {
+          if (currentPage > 0) {
+            currentPage--;
+            renderTable(expenses);
+          }
         });
       })
 
