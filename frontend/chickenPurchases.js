@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             //logic to remove the actions column when the user is not an admin
             let actions = `
-                      <td>
+                      <td class="action-buttons">
                           <button class="edit-btn" onclick="enableEditing(${purchase.id})">Edit</button>
                           <button id="save-btn-${purchase.id}" style="display:none;" onclick="savePurchase(${purchase.id})">Save</button>
                           <button class="delete-btn" onclick="deletePurchase(${purchase.id})">Delete</button>                          
@@ -169,11 +169,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Save the edited purchase record
   window.savePurchase = function (id) {
+    const pricePerPiece = document.getElementById(`price-per-piece-${id}`);
+    const numberOfPieces = document.getElementById(`number-of-pieces-${id}`);
+    const totalPrice = document.getElementById(`total-price-${id}`);
+
+    // Add event listeners to the input elements
+    pricePerPiece.addEventListener("input", calculate());
+    numberOfPieces.addEventListener("input", calculate());
+
+    function calculate() {
+      const price = parseFloat(pricePerPiece.value);
+      const pieces = parseInt(numberOfPieces.value);
+      totalPrice.value = isNaN(price) || isNaN(pieces) ? 0 : price * pieces;
+    }
+
+    // Form data
     const supplierId = document.getElementById(`supplier-id-${id}`).value;
     const chickenType = document.getElementById(`type-of-chicken-${id}`).value;
-    const price = document.getElementById(`price-per-piece-${id}`).value;
-    const pieces = document.getElementById(`number-of-pieces-${id}`).value;
-    const total = document.getElementById(`total-price-${id}`).value;
+    const price = parseFloat(pricePerPiece.value);
+    const pieces = parseInt(numberOfPieces.value);
+    const total = parseFloat(totalPrice.value);
     const date = document.getElementById(`purchase-date-${id}`).value;
 
     fetch(`${url}/api/chicken-purchases/${id}`, {
@@ -191,6 +206,14 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log("Updated:", data.message);
+        const info = document.getElementById("info");
+        const toast = document.createElement("div");
+        toast.classList.add("toast");
+        toast.innerHTML = `<p>${data.message}</p>`;
+        info.appendChild(toast);
+        setTimeout(() => {
+          toast.remove();
+        }, 2000);
         displayPurchases(); // Refresh the table
       })
       .catch((error) => console.error("Error:", error));

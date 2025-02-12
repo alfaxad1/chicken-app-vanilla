@@ -204,9 +204,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             row.innerHTML = `
-                    <td><input type="date" id="sale-date-${
-                      sale.id
-                    }" value="${formattedDate}" disabled></td>
+                    <td><input type="date" id="sale-date-${sale.id}" value="${
+              sale.date.split("T")[0]
+            }" disabled></td>
                     <td><input type="text" id="customer-id-${sale.id}" value="${
               sale.customer_id || "N/A"
             }" disabled></td>
