@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("chickenLoss-form");
   const lossData = document.getElementById("chickenLoss-data");
 
+  let currentPage = 0;
+  const recordsPerPage = 10;
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -83,7 +86,13 @@ document.addEventListener("DOMContentLoaded", function () {
             </thead>
             <tbody id="chicken-loss-table-body"></tbody>
         </table>
+        <button id="prev-button" style="display: none;"><</button>
+        <button id="next-button">></button>
       `;
+
+        const prevButton = document.getElementById("prev-button");
+        const nextButton = document.getElementById("next-button");
+
         //search bar implementation
         searchBar = document.getElementById("search-bar");
         const tableBody = document.getElementById("chicken-loss-table-body");
@@ -91,7 +100,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const renderTable = (filteredChickenLosses) => {
           tableBody.innerHTML = "";
 
-          filteredChickenLosses.forEach((chickenLoss) => {
+          const start = currentPage * recordsPerPage;
+          const end = start + recordsPerPage;
+          const paginatedChickenLosses = filteredChickenLosses.slice(
+            start,
+            end
+          );
+
+          paginatedChickenLosses.forEach((chickenLoss) => {
             let actions = `
             <td class="action-buttons">
                <button class="edit-btn" onclick="enableEditingLoss(${chickenLoss.id})">Edit</button>
@@ -126,6 +142,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             tableBody.appendChild(row);
           });
+
+          // Disable the next button if there are no more records
+          nextButton.style.display =
+            end >= filteredChickenLosses.length ? "none" : "inline";
+          // Disable the previous button if on the first page
+          prevButton.style.display = currentPage === 0 ? "none" : "inline";
         };
 
         renderTable(chickenLosses);
@@ -139,6 +161,16 @@ document.addEventListener("DOMContentLoaded", function () {
             );
           });
           renderTable(filteredChickenLosses);
+        });
+        nextButton.addEventListener("click", () => {
+          currentPage++;
+          renderTable(chickenLosses);
+        });
+        prevButton.addEventListener("click", () => {
+          if (currentPage > 0) {
+            currentPage--;
+            renderTable(chickenLosses);
+          }
         });
       })
       .catch((error) => {

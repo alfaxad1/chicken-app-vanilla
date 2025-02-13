@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const numberOfPieces = document.getElementById("number-of-pieces");
   const totalPrice = document.getElementById("total-price");
 
+  let currentPage = 0;
+  const recordsPerPage = 10;
+
   // Automatically calculate total when price or pieces are updated
   pricePerPiece.addEventListener("input", calculateTotal);
   numberOfPieces.addEventListener("input", calculateTotal);
@@ -106,14 +109,25 @@ document.addEventListener("DOMContentLoaded", function () {
                         </thead>
                         <tbody id="purchases-table-body"></tbody>
                     </table>
+                    <button id="prev-button" style="display: none;"><</button>
+                    <button id="next-button">></button>
                 `;
+
+        const prevButton = document.getElementById("prev-button");
+        const nextButton = document.getElementById("next-button");
+
         //search bar implementation
         searchBar = document.getElementById("search-bar");
         const tableBody = document.getElementById("purchases-table-body");
 
         const renderTable = (filteredPurchases) => {
           tableBody.innerHTML = "";
-          filteredPurchases.forEach((purchase) => {
+
+          const start = currentPage * recordsPerPage;
+          const end = start + recordsPerPage;
+          const paginatedPurchases = filteredPurchases.slice(start, end);
+
+          paginatedPurchases.forEach((purchase) => {
             const row = document.createElement("tr");
 
             //logic to remove the actions column when the user is not an admin
@@ -139,7 +153,13 @@ document.addEventListener("DOMContentLoaded", function () {
                       `;
             tableBody.appendChild(row);
           });
+          // Disable the next button if there are no more records
+          nextButton.style.display =
+            end >= filteredPurchases.length ? "none" : "inline";
+          // Disable the previous button if on the first page
+          prevButton.style.display = currentPage === 0 ? "none" : "inline";
         };
+
         renderTable(purchases);
 
         searchBar.addEventListener("keyup", (e) => {
@@ -151,6 +171,17 @@ document.addEventListener("DOMContentLoaded", function () {
             );
           });
           renderTable(filteredPurchases);
+        });
+
+        nextButton.addEventListener("click", () => {
+          currentPage++;
+          renderTable(purchases);
+        });
+        prevButton.addEventListener("click", () => {
+          if (currentPage > 0) {
+            currentPage--;
+            renderTable(purchases);
+          }
         });
       })
       .catch((error) => console.error("Error:", error));

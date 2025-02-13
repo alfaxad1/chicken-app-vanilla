@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const purchaseForm = document.getElementById("purchase-form");
   const purchasesData = document.getElementById("purchases-data");
 
+  let currentPage = 0;
+  const recordsPerPage = 10;
+
   // Handle purchase form submission
   purchaseForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -72,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <thead>
                 <tr>
                   <th>Product</th>
-                  <th>Quantity (kg)</th>
+                  <th>Quantity (bags)</th>
                   <th>Cost (Ksh)</th>
                   <th>Date</th>
                   <th>Actions</th>
@@ -80,7 +83,12 @@ document.addEventListener("DOMContentLoaded", function () {
               </thead>
               <tbody id="purchases-table-body"></tbody>
             </table>
+            <button id="prev-button" style="display: none;"><</button>
+            <button id="next-button">></button>
           `;
+
+        const prevButton = document.getElementById("prev-button");
+        const nextButton = document.getElementById("next-button");
 
         //search bar implementation
         searchBar = document.getElementById("search-bar");
@@ -89,7 +97,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const renderTable = (filteredPurchases) => {
           tableBody.innerHTML = "";
 
-          filteredPurchases.forEach((purchase) => {
+          const start = currentPage * recordsPerPage;
+          const end = start + recordsPerPage;
+          const paginatedPurchases = filteredPurchases.slice(start, end);
+
+          paginatedPurchases.forEach((purchase) => {
             const row = document.createElement("tr");
 
             //logic to remove the actions column when the user is not an admin
@@ -113,6 +125,11 @@ document.addEventListener("DOMContentLoaded", function () {
                `;
             tableBody.appendChild(row);
           });
+          // Disable the next button if there are no more records
+          nextButton.style.display =
+            end >= filteredPurchases.length ? "none" : "inline";
+          // Disable the previous button if on the first page
+          prevButton.style.display = currentPage === 0 ? "none" : "inline";
         };
         renderTable(purchases);
 
@@ -122,6 +139,16 @@ document.addEventListener("DOMContentLoaded", function () {
             return purchase.product_name.toLowerCase().includes(searchString);
           });
           renderTable(filteredPurchases);
+        });
+        nextButton.addEventListener("click", () => {
+          currentPage++;
+          renderTable(purchases);
+        });
+        prevButton.addEventListener("click", () => {
+          if (currentPage > 0) {
+            currentPage--;
+            renderTable(purchases);
+          }
         });
       })
       .catch((error) => console.error("Error fetching purchases:", error));

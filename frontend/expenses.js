@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const expensesData = document.getElementById("expenses-data");
 
   let currentPage = 0;
-  const recordsPerPage = 5;
+  const recordsPerPage = 10;
   // Handle expenses form submission
   expensesForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -89,17 +89,20 @@ document.addEventListener("DOMContentLoaded", function () {
           <button id="prev-button" style="display: none;"><</button>
           <button id="next-button">></button>
         `;
-        const prevButton = document.getElementById("prev-button");
 
+        const prevButton = document.getElementById("prev-button");
         const nextButton = document.getElementById("next-button");
+
         //search bar implementation
         searchBar = document.getElementById("search-bar");
         const tableBody = document.getElementById("expenses-table-body");
         const renderTable = (filteredExpenses) => {
           tableBody.innerHTML = "";
+
           const start = currentPage * recordsPerPage;
           const end = start + recordsPerPage;
           const paginatedExpenses = filteredExpenses.slice(start, end);
+
           paginatedExpenses.forEach((expense) => {
             //logic to remove the actions column when the user is not an admin
             let actions = `
@@ -129,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
             tableBody.appendChild(row);
           });
+
           // Disable the next button if there are no more records
           nextButton.style.display =
             end >= filteredExpenses.length ? "none" : "inline";
@@ -164,7 +168,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  // Make these functions global so they can be accessed by the onclick handlers
   window.enableEditingExpense = function (id) {
     document.getElementById(`expense-type-${id}`).disabled = false;
     document.getElementById(`expense-cost-${id}`).disabled = false;

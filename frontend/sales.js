@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const salesForm = document.getElementById("sales-form");
   const salesData = document.getElementById("sales-data");
 
+  let currentPage = 0;
+  const recordsPerPage = 10;
+
   // Initially show chicken sale fields
   chickenSaleFields.style.display = "block";
   eggsSaleFields.style.display = "none";
@@ -168,7 +171,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 </thead>
                 <tbody id="sales-table-body"></tbody>
               </table>
+              <button id="prev-button" style="display: none;"><</button>
+              <button id="next-button">></button>
             `;
+
+        const prevButton = document.getElementById("prev-button");
+        const nextButton = document.getElementById("next-button");
 
         searchBar = document.getElementById("search-bar");
         const tableBody = document.getElementById("sales-table-body");
@@ -176,13 +184,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const renderTable = (filteredSales) => {
           tableBody.innerHTML = "";
 
-          filteredSales.forEach((sale) => {
-            const row = document.createElement("tr");
+          const start = currentPage * recordsPerPage;
+          const end = start + recordsPerPage;
+          const paginatedSales = filteredSales.slice(start, end);
 
-            // Format the date
-            const formattedDate = sale.date
-              ? new Date(sale.date).toLocaleDateString()
-              : "N/A";
+          paginatedSales.forEach((sale) => {
+            const row = document.createElement("tr");
 
             // Determine sale type and quantity
             const saleType = sale.chicken_type || "Eggs";
@@ -227,6 +234,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             tableBody.appendChild(row);
           });
+          // Disable the next button if there are no more records
+          nextButton.style.display =
+            end >= filteredSales.length ? "none" : "inline";
+          // Disable the previous button if on the first page
+          prevButton.style.display = currentPage === 0 ? "none" : "inline";
         };
         renderTable(sales);
         searchBar.addEventListener("keyup", (e) => {
@@ -235,6 +247,16 @@ document.addEventListener("DOMContentLoaded", function () {
             return sale.customer_id.toLowerCase().includes(searchString);
           });
           renderTable(filteredSales);
+        });
+        nextButton.addEventListener("click", () => {
+          currentPage++;
+          renderTable(sales);
+        });
+        prevButton.addEventListener("click", () => {
+          if (currentPage > 0) {
+            currentPage--;
+            renderTable(sales);
+          }
         });
       })
       .catch((error) => {

@@ -79,34 +79,76 @@ document.addEventListener("DOMContentLoaded", function () {
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        ${collections
-                          .map(
-                            (collection) => `
-                            <tr>
-                                <td>${new Date(
-                                  collection.collection_date
-                                ).toLocaleDateString()}</td>
-                                <td>${collection.eggs_collected}</td>
-                                <td>${collection.damaged_eggs}</td>
-                                <td>${
-                                  collection.eggs_collected -
-                                  collection.damaged_eggs
-                                }</td>
-                                <td>
-                                    <button class="delete-btn" onclick="deleteCollection(${
-                                      collection.id
-                                    })">Delete</button>
-                                </td>
-                            </tr>
-                        `
-                          )
-                          .join("")}
-                    </tbody>
+                    <tbody id="collection-table-body"></tbody>                   
                 </table>
             `;
-      });
+
+        const tableBody = document.getElementById("collection-table-body");
+        collections.forEach((collection) => {
+          let actions = `
+            <td class="action-buttons">
+                <button class="edit-btn" onclick="enableEditingCollection(${collection.id})">Edit</button>
+                <button id="save-btn-collection-${collection.id}" onclick="saveCollection(${collection.id})" style="display:none;">Save</button>
+                <button class="delete-btn" onclick="deleteCollection(${collection.id})">Delete</button>
+            </td>
+      `;
+
+          const row = document.createElement("tr");
+          row.innerHTML = `
+         <td><input type="date" id="collection-date-${collection.id}" value="${
+            collection.collection_date.split("T")[0]
+          }" disabled></td>
+         <td><input type="text" id="collected-eggs-${collection.id}" value="${
+            collection.eggs_collected
+          }" disabled></td>
+         <td><input type="text" id="damaged-eggs-${collection.id}" value="${
+            collection.damaged_eggs
+          }" disabled></td>
+         <td><input type="text" id="good-eggs-${collection.id}" value="${
+            collection.eggs_collected - collection.damaged_eggs
+          }" disabled></td>
+        ${actions}
+      `;
+
+          tableBody.appendChild(row);
+        });
+      })
+      .catch((error) => console.error("Error:", error));
   }
+  window.enableEditingCollection = function (id) {
+    document.getElementById(`collection-date-${collection.id}`).disable = false;
+    document.getElementById(`collected-eggs-${collection.id}`).disable = false;
+    document.getElementById(`damaged-eggs-${collection.id}`).disable = false;
+    document.getElementById(`good-eggs-${collection.id}`).disable = false;
+    document.getElementById(`save-btn-collection-${id}`).style.display =
+      "inline";
+  };
+
+  window.saveCollection = function (id) {
+    const date = document.getElementById(`collection-date-${id}`).value;
+    const collectedEggs = document.getElementById(`collected-eggs-${id}`).value;
+    const damagedEggs = document.getElementById(`damaged-eggs-${id}`).value;
+    const goodEggs = document.getElementById(`good-eggs-${id}`).value;
+
+    fetch(`${url}/api/egg-collection/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ date, collectedEggs, damagedEggs, goodEggs }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message);
+        const info = document.getElementById("info");
+        const toast = document.createElement("div");
+        toast.classList.add("toast");
+        toast.innerHTML = `<p>${data.message}</p>`;
+        info.appendChild(toast);
+        setTimeout(() => {
+          toast.remove();
+        }, 2000);
+        displayCollectionHistory();
+      });
+  };
 
   // Function to update the chart
   function updateChart() {

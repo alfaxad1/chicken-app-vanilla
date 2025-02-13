@@ -66,4 +66,23 @@ router.delete("/:id", (req, res) => {
   });
 });
 
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const { date, collectedEggs, damagedEggs } = req.body;
+  const query =
+    "UPDATE egg_collection SET eggs_collected = ?, collection_date = ?, damaged_eggs = ?  WHERE id = ?";
+  connection.query(
+    query,
+    [collectedEggs, date, damagedEggs, id],
+    (err, results) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      }
+      return res
+        .status(200)
+        .json({ message: "Collection updated successfully" });
+    }
+  );
+});
+
 module.exports = router;
