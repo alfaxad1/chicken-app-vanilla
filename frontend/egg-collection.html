@@ -92,6 +92,68 @@
         padding-bottom: 10px;
         margin-bottom: 15px;
       }
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+      input:focus {
+        border-color: #3498db;
+        outline: none;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: white;
+      }
+      th,
+      td {
+        padding: 4px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      th {
+        background-color: #f8f9fa;
+        font-weight: 500;
+        color: #2c3e50;
+      }
+      tr:hover {
+        background-color: #f8f9fa;
+      }
+      td input {
+        border: 1px solid #ddd;
+        padding: 8px;
+        border-radius: 4px;
+        width: 90%;
+      }
+      td input:disabled {
+        background-color: #f8f9fa;
+        border: 1px solid transparent;
+      }
+      .action-buttons {
+        display: flex;
+        gap: 5px;
+      }
+      .action-buttons button {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+      .delete-btn {
+        background-color: #e74c3c;
+      }
+      .delete-btn:hover {
+        background-color: #c0392b;
+      }
+      .edit-btn {
+        background-color: #f39c12;
+      }
+      .edit-btn:hover {
+        background-color: #d35400;
+      }
 
       #egg-collection-form {
         display: grid;
@@ -156,13 +218,6 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
-      }
-
-      .delete-btn {
-        background-color: #e74c3c;
-      }
-      .delete-btn:hover {
-        background-color: #c0392b;
       }
 
       .toast {

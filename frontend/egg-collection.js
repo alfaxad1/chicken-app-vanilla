@@ -30,6 +30,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const eggsCollected = document.getElementById("eggs-collected").value;
     const damagedEggs = document.getElementById("damaged-eggs").value;
 
+    let currentPage = 0;
+    const recordsPerPage = 7;
+
     // Save to database
     fetch(`${url}/api/egg-collection`, {
       method: "POST",
@@ -54,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
           toast.remove();
         }, 2000);
 
-        form.reset();
         closeForm();
         displayCollectionHistory();
         updateChart();
@@ -84,6 +86,8 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
 
         const tableBody = document.getElementById("collection-table-body");
+        tableBody.innerHTML = "";
+
         collections.forEach((collection) => {
           let actions = `
             <td class="action-buttons">
@@ -116,10 +120,10 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => console.error("Error:", error));
   }
   window.enableEditingCollection = function (id) {
-    document.getElementById(`collection-date-${collection.id}`).disable = false;
-    document.getElementById(`collected-eggs-${collection.id}`).disable = false;
-    document.getElementById(`damaged-eggs-${collection.id}`).disable = false;
-    document.getElementById(`good-eggs-${collection.id}`).disable = false;
+    document.getElementById(`collection-date-${id}`).disabled = false;
+    document.getElementById(`collected-eggs-${id}`).disabled = false;
+    document.getElementById(`damaged-eggs-${id}`).disabled = false;
+    document.getElementById(`good-eggs-${id}`).disabled = false;
     document.getElementById(`save-btn-collection-${id}`).style.display =
       "inline";
   };
@@ -133,7 +137,11 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(`${url}/api/egg-collection/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ date, collectedEggs, damagedEggs, goodEggs }),
+      body: JSON.stringify({
+        date: date,
+        collectedEggs: collectedEggs,
+        damagedEggs: damagedEggs,
+      }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -146,6 +154,8 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
           toast.remove();
         }, 2000);
+
+        updateChart();
         displayCollectionHistory();
       });
   };
@@ -166,9 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
         chart = new Chart(ctx, {
           type: "line",
           data: {
-            labels: data.map((item) =>
-              new Date(item.collection_date).toLocaleDateString()
-            ),
+            labels: data.map((item) => item.collection_date.split("T")[0]),
             datasets: [
               {
                 label: "Eggs Collected",
