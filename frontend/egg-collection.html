@@ -76,6 +76,12 @@
         background-color: #2980b9;
       }
 
+      #prev-button,
+      #next-button {
+        background-color: #3498db;
+        padding: 5px 10px;
+      }
+
       .butt {
         background-color: #4caf50;
         color: white;
@@ -281,10 +287,6 @@
       const token = localStorage.getItem("token");
       if (!token) {
         window.location.href = "index.html";
-      }
-
-      if (user.role !== "admin" && user.role !== "superadmin") {
-        window.document.getElementById("create-btn").remove();
       }
     </script>
   </body>

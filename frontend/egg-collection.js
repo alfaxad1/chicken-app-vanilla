@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("egg-collection-form");
   let chart = null;
 
+  let currentPage = 0;
+  const recordsPerPage = 7;
+
   // Handle form submission
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -29,9 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const collectionDate = document.getElementById("collection-date").value;
     const eggsCollected = document.getElementById("eggs-collected").value;
     const damagedEggs = document.getElementById("damaged-eggs").value;
-
-    let currentPage = 0;
-    const recordsPerPage = 7;
 
     // Save to database
     fetch(`${url}/api/egg-collection`, {
@@ -83,13 +83,24 @@ document.addEventListener("DOMContentLoaded", function () {
                     </thead>
                     <tbody id="collection-table-body"></tbody>                   
                 </table>
+                <button id="prev-button" style="display: none;"><</button>
+                <button id="next-button">></button>
             `;
 
-        const tableBody = document.getElementById("collection-table-body");
-        tableBody.innerHTML = "";
+        const prevButton = document.getElementById("prev-button");
+        const nextButton = document.getElementById("next-button");
 
-        collections.forEach((collection) => {
-          let actions = `
+        const tableBody = document.getElementById("collection-table-body");
+
+        const renderTable = (collections) => {
+          tableBody.innerHTML = "";
+
+          const start = currentPage * recordsPerPage;
+          const end = start + recordsPerPage;
+          const paginatedCollections = collections.slice(start, end);
+
+          paginatedCollections.forEach((collection) => {
+            let actions = `
             <td class="action-buttons">
                 <button class="edit-btn" onclick="enableEditingCollection(${collection.id})">Edit</button>
                 <button id="save-btn-collection-${collection.id}" onclick="saveCollection(${collection.id})" style="display:none;">Save</button>
@@ -97,24 +108,41 @@ document.addEventListener("DOMContentLoaded", function () {
             </td>
       `;
 
-          const row = document.createElement("tr");
-          row.innerHTML = `
+            const row = document.createElement("tr");
+            row.innerHTML = `
          <td><input type="date" id="collection-date-${collection.id}" value="${
-            collection.collection_date.split("T")[0]
-          }" disabled></td>
+              collection.collection_date.split("T")[0]
+            }" disabled></td>
          <td><input type="text" id="collected-eggs-${collection.id}" value="${
-            collection.eggs_collected
-          }" disabled></td>
+              collection.eggs_collected
+            }" disabled></td>
          <td><input type="text" id="damaged-eggs-${collection.id}" value="${
-            collection.damaged_eggs
-          }" disabled></td>
+              collection.damaged_eggs
+            }" disabled></td>
          <td><input type="text" id="good-eggs-${collection.id}" value="${
-            collection.eggs_collected - collection.damaged_eggs
-          }" disabled></td>
+              collection.eggs_collected - collection.damaged_eggs
+            }" disabled></td>
         ${actions}
       `;
 
-          tableBody.appendChild(row);
+            tableBody.appendChild(row);
+          });
+          nextButton.style.display =
+            end >= collections.length ? "none" : "inline";
+          // Disable the previous button if on the first page
+          prevButton.style.display = currentPage === 0 ? "none" : "inline";
+        };
+        renderTable(collections);
+
+        nextButton.addEventListener("click", () => {
+          currentPage++;
+          renderTable(collections);
+        });
+        prevButton.addEventListener("click", () => {
+          if (currentPage > 0) {
+            currentPage--;
+            renderTable(collections);
+          }
         });
       })
       .catch((error) => console.error("Error:", error));

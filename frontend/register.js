@@ -22,7 +22,7 @@ document
       .then((data) => {
         console.log(data);
         if (data.Status === "Success") {
-          window.location.href = "superAdmin.html";
+          window.location.href = "login.html";
           console.log(data);
         } else if (data.error) {
           const errorMessage = data.error.message.replace(/"/g, "");
