@@ -82,12 +82,11 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   fetchChickenPurchaseData();
 
-  const form = document.getElementById("chickenLoss-form");
   //const lossData = document.getElementById("chickenLoss-data");
 
   //fetch chicken losses start
   const fetchChikenLosses = () => {
-    fetch(`${url}/api/chicken-loss`)
+    fetch(`${url}/api/batch-chicken-loss`)
       .then((response) => response.json())
       .then((chickenLosses) => {
         console.log(chickenLosses);
@@ -96,14 +95,38 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchChikenLosses();
   //fetch chicken losses end
 
-  form.addEventListener("submit", function (e) {
+  //fetch expenses start
+  function displayExpenses() {
+    fetch(`${url}/api/batch-expenses`)
+      .then((response) => response.json())
+      .then((expenses) => {
+        console.log(expenses);
+      });
+  }
+  displayExpenses();
+  //fetch expenses end
+
+  function displayPurchases() {
+    fetch(`${url}/api/batch-purchases`)
+      .then((response) => response.json())
+      .then((purchases) => {
+        console.log(purchases);
+      });
+  }
+  displayPurchases();
+
+  const chickenLossForm = document.getElementById("chickenLoss-form");
+  const expensesForm = document.getElementById("expenses-form");
+  const purchaseForm = document.getElementById("purchase-form");
+
+  //chicken loss form submission start
+  chickenLossForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    //chicken loss form submission start
     const chickenType = document.getElementById("chicken-type").value;
     const cause = document.getElementById("cause").value;
     const number = document.getElementById("number").value;
-    //const date = document.getElementById("date").value;
+    const date = document.getElementById("date").value;
 
     const saveChickenLoss = () => {
       fetch(`${url}/api/batch-chicken-loss`, {
@@ -122,14 +145,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     };
     saveChickenLoss();
-    //chicken loss form submission end
+  });
+  //chicken loss form submission end
 
-    //expense form submission start
+  //expense form submission start
+  expensesForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
     const type = document.getElementById("expense-type").value;
     const cost = document.getElementById("expense-cost").value;
     const date = document.getElementById("expense-date").value;
 
-    // Save to the database
     fetch(`${url}/api/batch-expenses`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -140,6 +166,24 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(data.message);
         closeExpenseForm();
       });
-    //expense form submission end
+  });
+  //expense form submission end
+
+  purchaseForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const product = document.getElementById("product").value;
+    const qty = document.getElementById("quantity").value;
+    const price = document.getElementById("cost").value;
+    const date = document.getElementById("purchase-date").value;
+
+    fetch(`${url}/api/batch-purchases`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ product, qty, price, date }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message);
+      });
   });
 });
