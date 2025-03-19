@@ -15,6 +15,7 @@ const eggCollection = require("./routes/eggCollection");
 const chickenPurchases = require("./routes/chickenPurchase");
 const users = require("./routes/users");
 const chickenLoss = require("./routes/chickenLoss");
+const batchPurchases = require("./routes/batch-purchases");
 
 app.use("/api/purchases", purchases);
 app.use("/api/sales", sales);
@@ -24,6 +25,7 @@ app.use("/api/egg-collection", eggCollection);
 app.use("/api/chicken-purchases", chickenPurchases);
 app.use("/api/users", users);
 app.use("/api/chicken-loss", chickenLoss);
+app.use("/api/batch-purchases", batchPurchases);
 
 const PORT = process.env.PORT;
 const appName = process.env.APP_NAME;
