@@ -12,6 +12,15 @@ router.get("/", (req, res) => {
   });
 });
 
+//get a chicken purchase by id
+router.get("/:id", (req, res) => {
+  const query = "SELECT * FROM chicken_purchases WHERE id = ?";
+  connection.query(query, [req.params.id], (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 // Create a chicken purchase
 router.post("/", (req, res) => {
   const { supplierId, chickenType, price, pieces, total, date } = req.body;

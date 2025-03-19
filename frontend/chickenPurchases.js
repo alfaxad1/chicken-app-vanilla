@@ -135,7 +135,8 @@ document.addEventListener("DOMContentLoaded", function () {
                       <td class="action-buttons">
                           <button class="edit-btn" onclick="enableEditing(${purchase.id})">Edit</button>
                           <button id="save-btn-${purchase.id}" style="display:none;" onclick="savePurchase(${purchase.id})">Save</button>
-                          <button class="delete-btn" onclick="deletePurchase(${purchase.id})">Delete</button>                          
+                          <button class="delete-btn" onclick="deletePurchase(${purchase.id})">Delete</button>
+                          <button class="details-btn" onclick="showDetails(${purchase.id})">Details</button>                          
                       </td>`;
             const user = JSON.parse(localStorage.getItem("user"));
             if (user.role !== "admin" && user.role !== "superadmin") {
@@ -186,6 +187,10 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch((error) => console.error("Error:", error));
   }
+  window.showDetails = function (id) {
+    localStorage.setItem("ID", id);
+    window.location.href = "details.html";
+  };
 
   // Enable editing of a purchase record
   window.enableEditing = function (id) {
