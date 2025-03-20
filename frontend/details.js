@@ -65,6 +65,7 @@ let totalPurchasesCost = 0;
 let totalExpensesCost = 0;
 let totalChickenLoss = 0;
 let totalChickenPurchasesCost = 0;
+let purchaseDate = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
   const url = "http://localhost:3000";
@@ -78,10 +79,28 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((chickenPurchases) => {
         console.log(chickenPurchases);
         totalChickenPurchasesCost = chickenPurchases[0].total_price;
+        purchaseDate = chickenPurchases[0].purchase_date;
+        const ageAtPurchase = chickenPurchases[0].age;
         console.log(
           `Total chicken purchase cost: ${totalChickenPurchasesCost}`
         );
       });
+    function calculateAgeInWeeks(purchaseDate) {
+      let dob = new Date(purchaseDate);
+      if (isNaN(dob)) {
+        return "Invalid date format. Use YYYY-MM-DD.";
+      }
+      let currentDate = new Date();
+
+      let diffInMs = currentDate - dob;
+
+      let ageInWeeks = Math.floor(diffInMs / (7 * 24 * 60 * 60 * 1000));
+      let ageInMonths = (ageInWeeks / 4.345).toFixed(0);
+
+      console.log(`Age in weeks: ${ageInWeeks}`);
+      console.log(`Age in months: ${ageInMonths}`);
+    }
+    calculateAgeInWeeks(purchaseDate);
   };
   fetchChickenPurchaseData();
 
@@ -126,12 +145,13 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((purchases) => {
         console.log(purchases);
-        if (purchases) {
-          totalPurchasesCost = purchases.reduce((sum, purchase) => {
-            return sum + purchase.total_cost;
-          }, 0);
-          console.log(`Total purchases cost: ${totalPurchasesCost}`);
-        }
+        totalPurchasesCost = purchases.reduce((sum, purchase) => {
+          if (purchase.seller_id === parseInt(id)) {
+            return sum + purchase.price;
+          }
+          return sum;
+        }, 0);
+        console.log(`Total purchases cost: ${totalPurchasesCost}`);
       });
   };
   fetchPurchases();
@@ -209,6 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
+        purchaseForm.reset();
       });
   });
 });
