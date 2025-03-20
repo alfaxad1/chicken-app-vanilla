@@ -4,8 +4,8 @@ let totalChickenBought = 0;
 let totalChickenLoss = 0;
 let totalChickenInStock = 0;
 
-function fetchChickenPurchases() {
-  return fetch(`${url}/api/chicken-purchases`)
+async function fetchChickenPurchases() {
+  return await fetch(`${url}/api/chicken-purchases`)
     .then((response) => response.json())
     .then((purchases) => {
       if (purchases) {
@@ -45,8 +45,8 @@ function fetchChickenPurchases() {
 }
 
 //fetch sales data
-function fetchChickenSales() {
-  return fetch(`${url}/api/sales`)
+async function fetchChickenSales() {
+  return await fetch(`${url}/api/sales`)
     .then((response) => response.json())
     .then((sales) => {
       let total = 0;
@@ -70,8 +70,8 @@ function fetchChickenSales() {
     });
 }
 
-function fetchChickenLoss() {
-  return fetch(`${url}/api/chicken-loss`)
+async function fetchChickenLoss() {
+  return await fetch(`${url}/api/chicken-loss`)
     .then((response) => response.json())
     .then((losses) => {
       let totalLoss = 0;

@@ -60,6 +60,10 @@ expenseContainer.addEventListener("click", (e) => {
   }
 });
 //expense container end
+let totalPurchasesCost = 0;
+let totalExpensesCost = 0;
+let totalChickenLoss = 0;
+let totalChickenPurchasesCost = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
   const url = "http://localhost:3000";
@@ -70,19 +74,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const fetchChickenPurchaseData = () => {
     fetch(`${url}/api/chicken-purchases/${id}`)
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        const item = data[0];
-        details.innerHTML = `
-        <p>${item.supplier_id}</p>
-        <p>${item.chicken_type}</p>
-        <p>${item.no_of_pieces}</p>
-        `;
+      .then((chickenPurchases) => {
+        console.log(chickenPurchases);
+        totalChickenPurchasesCost = chickenPurchases[0].total_price;
+        console.log(
+          `Total chicken purchase cost: ${totalChickenPurchasesCost}`
+        );
       });
   };
   fetchChickenPurchaseData();
-
-  //const lossData = document.getElementById("chickenLoss-data");
 
   //fetch chicken losses start
   const fetchChikenLosses = () => {
@@ -90,6 +90,12 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((chickenLosses) => {
         console.log(chickenLosses);
+        if (chickenLosses) {
+          totalChickenLoss = chickenLosses.reduce((sum, loss) => {
+            return sum + loss.number;
+          }, 0);
+          console.log(`Total Chicken Loss: ${totalChickenLoss}`);
+        }
       });
   };
   fetchChikenLosses();
@@ -101,6 +107,12 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((expenses) => {
         console.log(expenses);
+        if (expenses) {
+          totalExpensesCost = expenses.reduce((sum, expense) => {
+            return sum + expense.Price;
+          }, 0);
+          console.log(`Total expense cost: ${totalExpensesCost}`);
+        }
       });
   }
   displayExpenses();
@@ -111,6 +123,12 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((purchases) => {
         console.log(purchases);
+        if (purchases) {
+          totalPurchasesCost = purchases.reduce((sum, purchase) => {
+            return sum + purchase.total_cost;
+          }, 0);
+          console.log(`Total purchase cost: ${totalPurchasesCost}`);
+        }
       });
   }
   displayPurchases();
@@ -127,17 +145,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const cause = document.getElementById("cause").value;
     const number = document.getElementById("number").value;
     const date = document.getElementById("date").value;
+    const sellerId = localStorage.getItem("ID");
 
     const saveChickenLoss = () => {
       fetch(`${url}/api/batch-chicken-loss`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chickenType, cause, number, date }),
+        body: JSON.stringify({ chickenType, cause, number, date, sellerId }),
       })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          form.reset();
+          chickenLossForm.reset();
           closeChickenLossForm();
         })
         .catch((error) => {

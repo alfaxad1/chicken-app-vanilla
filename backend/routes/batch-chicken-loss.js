@@ -4,16 +4,20 @@ const router = express.Router();
 router.use(express.json());
 
 router.post("/", (req, res) => {
-  const { chickenType, cause, number, date } = req.body;
+  const { chickenType, cause, number, date, sellerId } = req.body;
   const query =
-    "INSERT INTO batch_chicken_loss (chicken_type, cause, number, date) VALUES (?, ?, ?, ?)";
-  connection.query(query, [chickenType, cause, number, date], (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: "Internal Server Error" });
+    "INSERT INTO batch_chicken_loss (chicken_type, cause, number, date, seller_id) VALUES (?, ?, ?, ?, ?)";
+  connection.query(
+    query,
+    [chickenType, cause, number, date, sellerId],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+      res.json({ message: "Loss added successfully" });
     }
-    res.json({ message: "Loss added successfully" });
-  });
+  );
 });
 
 router.get("/", (req, res) => {
@@ -25,13 +29,13 @@ router.get("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-  const { chickenType, cause, number, date } = req.body;
+  const { chickenType, cause, number, date, sellerId } = req.body;
   const { id } = req.params;
   const query =
-    "UPDATE batch_chicken_loss SET chicken_type = ?, cause = ?, number = ?, date = ? WHERE id = ?";
+    "UPDATE batch_chicken_loss SET chicken_type = ?, cause = ?, number = ?, date = ? seller_id = ? WHERE id = ?";
   connection.query(
     query,
-    [chickenType, cause, number, date, id],
+    [chickenType, cause, number, date, sellerId, id],
     (err, result) => {
       if (err) throw err;
       res.json({ message: "Loss updated successfully" });
