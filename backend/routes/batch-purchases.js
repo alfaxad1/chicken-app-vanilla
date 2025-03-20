@@ -5,15 +5,19 @@ router.use(express.json());
 
 //save
 router.post("/", (req, res) => {
-  const { product, qty, price, date } = req.body;
+  const { product, qty, price, date, sellerId } = req.body;
   const query =
-    "INSERT INTO batch_purchases (product_name, quantity, price, purchase_date) VALUES (?, ?, ?, ?)";
-  connection.query(query, [product, qty, price, date], (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
+    "INSERT INTO batch_purchases (product_name, quantity, price, purchase_date, seller_id) VALUES (?, ?, ?, ?, ?)";
+  connection.query(
+    query,
+    [product, qty, price, date, sellerId],
+    (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      return res.status(200).json({ message: "Purchase Saved Successfully" });
     }
-    return res.status(200).json({ message: "Purchase Saved Successfully" });
-  });
+  );
 });
 
 //delete
@@ -55,13 +59,13 @@ router.get("/:id", (req, res) => {
 //update
 router.put("/:id", (req, res) => {
   const { id } = req.params;
-  const { product_name, quantity, price, purchase_date } = req.body;
+  const { product_name, quantity, price, purchase_date, sellerId } = req.body;
   const query =
     "UPDATE batch_purchases SET product_name = ?, quantity = ?, price = ?, purchase_date = ? WHERE id = ?";
 
   connection.query(
     query,
-    [product_name, quantity, price, purchase_date, id],
+    [product_name, quantity, price, purchase_date, sellerId, id],
     (err, result) => {
       if (err) {
         return res.status(500).json({ error: err.message });

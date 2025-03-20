@@ -5,11 +5,11 @@ router.use(express.json());
 
 // Save expenses to the database
 router.post("/", (request, response) => {
-  const { type, cost, date } = request.body;
+  const { type, cost, date, sellerId } = request.body;
   const query =
-    "INSERT INTO batch_expenses (Type, Price, Date) VALUES (?, ?, ?)";
+    "INSERT INTO batch_expenses (Type, Price, Date, seller_id) VALUES (?, ?, ?, ?)";
 
-  connection.query(query, [type, cost, date], (err, results) => {
+  connection.query(query, [type, cost, date, sellerId], (err, results) => {
     if (err) {
       console.error("Error saving expense:", err);
       return response.status(500).json({ error: err.message });
@@ -49,12 +49,12 @@ router.get("/", (request, response) => {
 //modify expenses
 router.put("/:id", (request, response) => {
   const { id } = request.params;
-  const { type, cost, date } = request.body;
+  const { type, cost, date, sellerId } = request.body;
 
   const query =
-    "UPDATE batch_expenses SET Type = ?, Price = ?, Date = ? WHERE id = ?";
+    "UPDATE batch_expenses SET Type = ?, Price = ?, Date = ? seller_id = ? WHERE id = ?";
 
-  connection.query(query, [type, cost, date, id], (err, result) => {
+  connection.query(query, [type, cost, date, sellerId, id], (err, result) => {
     if (err) {
       return response.status(500).json({ error: err.message });
     }

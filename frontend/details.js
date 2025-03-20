@@ -60,6 +60,7 @@ expenseContainer.addEventListener("click", (e) => {
   }
 });
 //expense container end
+
 let totalPurchasesCost = 0;
 let totalExpensesCost = 0;
 let totalChickenLoss = 0;
@@ -71,8 +72,8 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("id is: ", id);
   const details = document.getElementById("data");
 
-  const fetchChickenPurchaseData = () => {
-    fetch(`${url}/api/chicken-purchases/${id}`)
+  const fetchChickenPurchaseData = async () => {
+    await fetch(`${url}/api/chicken-purchases/${id}`)
       .then((response) => response.json())
       .then((chickenPurchases) => {
         console.log(chickenPurchases);
@@ -85,41 +86,43 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchChickenPurchaseData();
 
   //fetch chicken losses start
-  const fetchChikenLosses = () => {
-    fetch(`${url}/api/batch-chicken-loss`)
+  const fetchChikenLosses = async () => {
+    await fetch(`${url}/api/batch-chicken-loss`)
       .then((response) => response.json())
       .then((chickenLosses) => {
         console.log(chickenLosses);
-        if (chickenLosses) {
-          totalChickenLoss = chickenLosses.reduce((sum, loss) => {
+        totalChickenLoss = chickenLosses.reduce((sum, loss) => {
+          if (loss.seller_id === parseInt(id)) {
             return sum + loss.number;
-          }, 0);
-          console.log(`Total Chicken Loss: ${totalChickenLoss}`);
-        }
+          }
+          return sum;
+        }, 0);
+        console.log(`Total Chicken Loss: ${totalChickenLoss}`);
       });
   };
   fetchChikenLosses();
   //fetch chicken losses end
 
   //fetch expenses start
-  function displayExpenses() {
-    fetch(`${url}/api/batch-expenses`)
+  const fetchExpenses = async () => {
+    await fetch(`${url}/api/batch-expenses`)
       .then((response) => response.json())
       .then((expenses) => {
         console.log(expenses);
-        if (expenses) {
-          totalExpensesCost = expenses.reduce((sum, expense) => {
+        totalExpensesCost = expenses.reduce((sum, expense) => {
+          if (expense.seller_id === parseInt(id)) {
             return sum + expense.Price;
-          }, 0);
-          console.log(`Total expense cost: ${totalExpensesCost}`);
-        }
+          }
+          return sum;
+        }, 0);
+        console.log(`Total expense cost: ${totalExpensesCost}`);
       });
-  }
-  displayExpenses();
+  };
+  fetchExpenses();
   //fetch expenses end
 
-  function displayPurchases() {
-    fetch(`${url}/api/batch-purchases`)
+  const fetchPurchases = async () => {
+    await fetch(`${url}/api/batch-purchases`)
       .then((response) => response.json())
       .then((purchases) => {
         console.log(purchases);
@@ -127,11 +130,11 @@ document.addEventListener("DOMContentLoaded", function () {
           totalPurchasesCost = purchases.reduce((sum, purchase) => {
             return sum + purchase.total_cost;
           }, 0);
-          console.log(`Total purchase cost: ${totalPurchasesCost}`);
+          console.log(`Total purchases cost: ${totalPurchasesCost}`);
         }
       });
-  }
-  displayPurchases();
+  };
+  fetchPurchases();
 
   const chickenLossForm = document.getElementById("chickenLoss-form");
   const expensesForm = document.getElementById("expenses-form");
@@ -174,15 +177,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const type = document.getElementById("expense-type").value;
     const cost = document.getElementById("expense-cost").value;
     const date = document.getElementById("expense-date").value;
+    const sellerId = localStorage.getItem("ID");
 
     fetch(`${url}/api/batch-expenses`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type, cost, date }),
+      body: JSON.stringify({ type, cost, date, sellerId }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
+        expensesForm.reset();
         closeExpenseForm();
       });
   });
@@ -194,11 +199,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const qty = document.getElementById("quantity").value;
     const price = document.getElementById("cost").value;
     const date = document.getElementById("purchase-date").value;
+    const sellerId = localStorage.getItem("ID");
 
     fetch(`${url}/api/batch-purchases`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ product, qty, price, date }),
+      body: JSON.stringify({ product, qty, price, date, sellerId }),
     })
       .then((response) => response.json())
       .then((data) => {
