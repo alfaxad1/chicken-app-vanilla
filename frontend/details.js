@@ -105,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           console.log(`Age in weeks: ${totalAgeInWeeks}`);
           console.log(`Age in months: ${ageInMonths}`);
+          console.log(`Age at purchase: ${ageAtPurchase}`);
         }
         calculateAgeInWeeks(purchaseDate);
         fetchChikenLosses().then(() => {
@@ -114,17 +115,56 @@ document.addEventListener("DOMContentLoaded", function () {
                 parseInt(chickenBought) - parseInt(totalChickenLoss);
               console.log(`Chicken in stock: ${chickenInStock}`);
               details.innerHTML = `
-                  <p>Age in weeks: ${totalAgeInWeeks}</p>
-                  <p>Age in months: ${ageInMonths}</p>
-                  <p>Total chicken purchase cost: ${totalChickenPurchasesCost}</p>
-                  <p>Total purchases: ${totalPurchasesCost}</p>
-                  <p>Total expenses: ${totalExpensesCost}</p>
-                  <p>Total cost: ${
-                    totalChickenPurchasesCost +
-                    totalPurchasesCost +
-                    totalExpensesCost
-                  }</p>
-                  <p>Chicken stock: ${chickenInStock}</p>
+              <button class="back-button" onclick="window.location.href='chickenPurchases.html'"><i class="fas fa-arrow-left"></i >Back</button>
+              <h1>${chickenPurchases[0].supplier_id} chicken report</h1>
+              <div class="cards-container">
+                 <div class="card">
+                    <h3>Age in weeks</h3>
+                    <h2>${ageAtPurchase}</h2>
+                  </div>
+
+                  <div class="card">
+                    <h3>Age in weeks</h3>
+                    <h2>${totalAgeInWeeks}</h2>
+                  </div>
+
+                  <div class="card">
+                    <h3>Age in months</h3>
+                    <h2>${ageInMonths}</h2>
+                  </div>
+
+                  <div class="card">
+                    <h3>Total chicken purchase cost</h3>
+                    <h2>${totalChickenPurchasesCost}</h2>
+                  </div>
+
+                  <div class="card">
+                    <h3>Total purchases</h3>
+                    <h2>${totalPurchasesCost}</h2>
+                  </div>
+                  <div class="card">
+                    <h3>Total expenses</h3>
+                    <h2>${totalExpensesCost}</h2>
+                  </div>
+                  <div class="card">
+                    <h3>Total cost</h3>
+                    <h2>
+                      ${
+                        totalChickenPurchasesCost +
+                        totalPurchasesCost +
+                        totalExpensesCost
+                      }
+                    </h2>
+                  </div>
+                  <div class="card">
+                    <h3>Chicken lost</h3>
+                    <h2>${totalChickenLoss}</h2>
+                  </div>
+                  <div class="card">
+                    <h3>Chicken in stock</h3>
+                    <h2>${chickenInStock}</h2>
+                  </div>
+                </div>
                 `;
             });
           });
