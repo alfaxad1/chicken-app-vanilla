@@ -66,6 +66,9 @@ let totalExpensesCost = 0;
 let totalChickenLoss = 0;
 let totalChickenPurchasesCost = 0;
 let purchaseDate = 0;
+let chickenBought = 0;
+let totalAgeInWeeks = 0;
+let ageInMonths = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
   const url = "http://localhost:3000";
@@ -80,31 +83,56 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(chickenPurchases);
         totalChickenPurchasesCost = chickenPurchases[0].total_price;
         purchaseDate = chickenPurchases[0].purchase_date;
+        chickenBought = chickenPurchases[0].no_of_pieces;
+
         const ageAtPurchase = chickenPurchases[0].age;
         console.log(
           `Total chicken purchase cost: ${totalChickenPurchasesCost}`
         );
+
+        function calculateAgeInWeeks(purchaseDate) {
+          let dob = new Date(purchaseDate);
+          if (isNaN(dob)) {
+            return "Invalid date format. Use YYYY-MM-DD.";
+          }
+          let currentDate = new Date();
+
+          let diffInMs = currentDate - dob;
+
+          let ageInWeeks = Math.floor(diffInMs / (7 * 24 * 60 * 60 * 1000));
+          const totalAgeInWeeks = ageInWeeks + ageAtPurchase;
+          let ageInMonths = (totalAgeInWeeks / 4.345).toFixed(0);
+
+          console.log(`Age in weeks: ${totalAgeInWeeks}`);
+          console.log(`Age in months: ${ageInMonths}`);
+        }
+        calculateAgeInWeeks(purchaseDate);
+        fetchChikenLosses().then(() => {
+          fetchExpenses().then(() => {
+            fetchPurchases().then(() => {
+              const chickenInStock =
+                parseInt(chickenBought) - parseInt(totalChickenLoss);
+              console.log(`Chicken in stock: ${chickenInStock}`);
+              details.innerHTML = `
+                  <p>Age in weeks: ${totalAgeInWeeks}</p>
+                  <p>Age in months: ${ageInMonths}</p>
+                  <p>Total chicken purchase cost: ${totalChickenPurchasesCost}</p>
+                  <p>Total purchases: ${totalPurchasesCost}</p>
+                  <p>Total expenses: ${totalExpensesCost}</p>
+                  <p>Total cost: ${
+                    totalChickenPurchasesCost +
+                    totalPurchasesCost +
+                    totalExpensesCost
+                  }</p>
+                  <p>Chicken stock: ${chickenInStock}</p>
+                `;
+            });
+          });
+        });
       });
-    function calculateAgeInWeeks(purchaseDate) {
-      let dob = new Date(purchaseDate);
-      if (isNaN(dob)) {
-        return "Invalid date format. Use YYYY-MM-DD.";
-      }
-      let currentDate = new Date();
-
-      let diffInMs = currentDate - dob;
-
-      let ageInWeeks = Math.floor(diffInMs / (7 * 24 * 60 * 60 * 1000));
-      let ageInMonths = (ageInWeeks / 4.345).toFixed(0);
-
-      console.log(`Age in weeks: ${ageInWeeks}`);
-      console.log(`Age in months: ${ageInMonths}`);
-    }
-    calculateAgeInWeeks(purchaseDate);
   };
   fetchChickenPurchaseData();
 
-  //fetch chicken losses start
   const fetchChikenLosses = async () => {
     await fetch(`${url}/api/batch-chicken-loss`)
       .then((response) => response.json())
@@ -119,10 +147,8 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(`Total Chicken Loss: ${totalChickenLoss}`);
       });
   };
-  fetchChikenLosses();
-  //fetch chicken losses end
+  //fetchChikenLosses();
 
-  //fetch expenses start
   const fetchExpenses = async () => {
     await fetch(`${url}/api/batch-expenses`)
       .then((response) => response.json())
@@ -137,8 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(`Total expense cost: ${totalExpensesCost}`);
       });
   };
-  fetchExpenses();
-  //fetch expenses end
+  //fetchExpenses();
 
   const fetchPurchases = async () => {
     await fetch(`${url}/api/batch-purchases`)
@@ -154,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(`Total purchases cost: ${totalPurchasesCost}`);
       });
   };
-  fetchPurchases();
+  //fetchPurchases();
 
   const chickenLossForm = document.getElementById("chickenLoss-form");
   const expensesForm = document.getElementById("expenses-form");
