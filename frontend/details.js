@@ -194,26 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //chicken loss form submission end
 
   //expense form submission start
-  expensesForm.addEventListener("submit", function (e) {
-    e.preventDefault();
 
-    const type = document.getElementById("expense-type").value;
-    const cost = document.getElementById("expense-cost").value;
-    const date = document.getElementById("expense-date").value;
-    const sellerId = localStorage.getItem("ID");
-
-    fetch(`${url}/api/batch-expenses`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type, cost, date, sellerId }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.message);
-        expensesForm.reset();
-        closeExpenseForm();
-      });
-  });
   //expense form submission end
 
   purchaseForm.addEventListener("submit", function (e) {

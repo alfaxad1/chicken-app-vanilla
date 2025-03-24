@@ -7,7 +7,7 @@
     <link href="./batch-styles.css" rel="stylesheet" />
   </head>
   <body>
-    <button class="record-button" onclick="createExpense()">Create</button>
+    <button onclick="createExpense()">Create</button>
     <div class="container" id="expense-container">
       <form id="expenses-form">
         <div id="expenses-fields">
@@ -37,6 +37,7 @@
           <button onclick="closeExpenseForm()">Close</button>
         </div>
       </form>
+      <div id="expenses-data"></div>
     </div>
     <script src="./batch-expense.js"></script>
   </body>

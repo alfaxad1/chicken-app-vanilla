@@ -165,3 +165,97 @@ button:hover {
 .record-button:hover {
   background-color: #3e8e41;
 }
+
+label {
+  font-weight: 500;
+  color: #2c3e50;
+}
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  margin-top: 15px;
+  padding: 12px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  font-weight: 500;
+}
+#prev-button,
+#next-button {
+  background-color: #3498db;
+  padding: 5px 10px;
+}
+button:hover {
+  background-color: #2980b9;
+}
+.butt {
+  background-color: #2ecc71;
+  margin-bottom: 20px;
+}
+.butt:hover {
+  background-color: #27ae60;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+}
+th,
+td {
+  padding: 4px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+th {
+  background-color: #f8f9fa;
+  font-weight: 500;
+  color: #2c3e50;
+}
+tr:hover {
+  background-color: #f8f9fa;
+}
+td input {
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 4px;
+  width: 90%;
+}
+td input:disabled {
+  background-color: #f8f9fa;
+  border: 1px solid transparent;
+}
+.action-buttons {
+  display: flex;
+  gap: 5px;
+}
+.action-buttons button {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+.delete-btn {
+  background-color: #e74c3c;
+}
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+.edit-btn {
+  background-color: #f39c12;
+}
+.edit-btn:hover {
+  background-color: #d35400;
+}
