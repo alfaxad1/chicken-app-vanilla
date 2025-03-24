@@ -1,66 +1,3 @@
-const purchaseContainer = document.getElementById("purchase-container");
-purchaseContainer.style.display = "none";
-
-const expenseContainer = document.getElementById("expense-container");
-expenseContainer.style.display = "none";
-
-const chickenLossContainer = document.getElementById("chicken-loss-container");
-chickenLossContainer.style.display = "none";
-
-//chicken loss container start
-const createChickenLoss = () => {
-  chickenLossContainer.style.display = "flex";
-  document.body.style.overflow = "hidden";
-};
-
-const closeChickenLossForm = () => {
-  chickenLossContainer.style.display = "none";
-  document.body.style.overflow = "auto";
-};
-
-chickenLossContainer.addEventListener("click", (e) => {
-  if (e.target === chickenLossContainer) {
-    closeChickenLossForm();
-  }
-});
-//chicken loss container end
-
-//purchases container start
-const createPurchase = () => {
-  purchaseContainer.style.display = "flex";
-  document.body.style.overflow = "hidden";
-};
-
-const closeForm = () => {
-  purchaseContainer.style.display = "none";
-  document.body.style.overflow = "auto";
-};
-
-purchaseContainer.addEventListener("click", (e) => {
-  if (e.target === purchaseContainer) {
-    closeForm();
-  }
-});
-//purchases container end
-
-//expense container start
-const createExpense = () => {
-  expenseContainer.style.display = "flex";
-  document.body.style.overflow = "hidden";
-};
-
-const closeExpenseForm = () => {
-  expenseContainer.style.display = "none";
-  document.body.style.overflow = "auto";
-};
-
-expenseContainer.addEventListener("click", (e) => {
-  if (e.target === expenseContainer) {
-    closeForm();
-  }
-});
-//expense container end
-
 let totalPurchasesCost = 0;
 let totalExpensesCost = 0;
 let totalChickenLoss = 0;
@@ -100,8 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
           let diffInMs = currentDate - dob;
 
           let ageInWeeks = Math.floor(diffInMs / (7 * 24 * 60 * 60 * 1000));
-          const totalAgeInWeeks = ageInWeeks + ageAtPurchase;
-          let ageInMonths = (totalAgeInWeeks / 4.345).toFixed(0);
+          totalAgeInWeeks = ageInWeeks + ageAtPurchase;
+          ageInMonths = (totalAgeInWeeks / 4.345).toFixed(0);
 
           console.log(`Age in weeks: ${totalAgeInWeeks}`);
           console.log(`Age in months: ${ageInMonths}`);
@@ -114,12 +51,13 @@ document.addEventListener("DOMContentLoaded", function () {
               const chickenInStock =
                 parseInt(chickenBought) - parseInt(totalChickenLoss);
               console.log(`Chicken in stock: ${chickenInStock}`);
+
               details.innerHTML = `
               <button class="back-button" onclick="window.location.href='chickenPurchases.html'"><i class="fas fa-arrow-left"></i >Back</button>
               <h1>${chickenPurchases[0].supplier_id} chicken report</h1>
               <div class="cards-container">
                  <div class="card">
-                    <h3>Age in weeks</h3>
+                    <h3>Age at purchase</h3>
                     <h2>${ageAtPurchase}</h2>
                   </div>
 

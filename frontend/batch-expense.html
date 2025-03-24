@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="./batch-styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <button class="record-button" onclick="createExpense()">Create</button>
+    <div class="container" id="expense-container">
+      <form id="expenses-form">
+        <div id="expenses-fields">
+          <div>
+            <label for="expense-type">Type of Expense:</label>
+            <input
+              type="text"
+              id="expense-type"
+              placeholder="Enter expense type"
+              required
+            />
+          </div>
+          <div>
+            <label for="expense-cost">Cost:</label>
+            <input
+              type="number"
+              id="expense-cost"
+              placeholder="Enter cost"
+              required
+            />
+          </div>
+          <div>
+            <label for="expense-date">Date:</label>
+            <input type="date" id="expense-date" required />
+          </div>
+          <button type="submit">Save Expense</button>
+          <button onclick="closeExpenseForm()">Close</button>
+        </div>
+      </form>
+    </div>
+    <script src="./batch-expense.js"></script>
+  </body>
+</html>

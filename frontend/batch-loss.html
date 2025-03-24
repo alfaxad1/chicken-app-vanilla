@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="./batch-styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <button class="record-button" onclick="createChickenLoss()">Create</button>
+    <div class="container" id="chicken-loss-container">
+      <form id="chickenLoss-form">
+        <div>
+          <label for="chicken-type">Chicken Type</label>
+          <select id="chicken-type">
+            <option value="chick">chick</option>
+            <option value="hen">hen</option>
+            <option value="cockerel">cockerel</option>
+          </select>
+        </div>
+        <br />
+        <div>
+          <label for="cause">Cause: </label>
+          <input type="text" id="cause" placeholder="Cause of loss" />
+        </div>
+        <br />
+        <div>
+          <label for="number">Number of chicken: </label>
+          <input type="text" id="number" required placeholder="Number" />
+        </div>
+        <br />
+        <div>
+          <label for="date">Date: </label>
+          <input type="date" id="date" required placeholder="Date" />
+        </div>
+        <br />
+        <button type="submit">Save</button>
+        <button onclick="closeChickenLossForm()">Close</button>
+      </form>
+    </div>
+  </body>
+</html>
