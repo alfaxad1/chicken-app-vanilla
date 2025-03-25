@@ -45,6 +45,19 @@ router.get("/", (request, response) => {
     return response.status(200).json(results);
   });
 });
+//retrieve expenses by sellerid
+router.get("/:id", (request, response) => {
+  const { id } = request.params;
+  const query = "SELECT * FROM batch_expenses WHERE seller_id = ?";
+
+  connection.query(query, [id], (err, results) => {
+    if (err) {
+      console.error("Error fetching expenses:", err);
+      return response.status(500).json({ error: err.message });
+    }
+    return response.status(200).json(results);
+  });
+});
 
 //modify expenses
 router.put("/:id", (request, response) => {

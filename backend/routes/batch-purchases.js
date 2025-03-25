@@ -47,7 +47,7 @@ router.get("/", (req, res) => {
 //get by id
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  const query = "SELECT * FROM batch_purchases WHERE id = ?";
+  const query = "SELECT * FROM batch_purchases WHERE seller_id = ?";
   connection.query(query, [id], (err, results) => {
     if (err) {
       return res.status(500).json({ error: err.message });
@@ -61,7 +61,7 @@ router.put("/:id", (req, res) => {
   const { id } = req.params;
   const { product_name, quantity, price, purchase_date, sellerId } = req.body;
   const query =
-    "UPDATE batch_purchases SET product_name = ?, quantity = ?, price = ?, purchase_date = ? WHERE id = ?";
+    "UPDATE batch_purchases SET product_name = ?, quantity = ?, price = ?, purchase_date = ?, seller_id = ? WHERE id = ?";
 
   connection.query(
     query,

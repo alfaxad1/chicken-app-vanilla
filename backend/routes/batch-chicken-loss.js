@@ -28,6 +28,16 @@ router.get("/", (req, res) => {
   });
 });
 
+//retrieve by seller id
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  const query = "SELECT * FROM batch_chicken_loss WHERE seller_id = ?";
+  connection.query(query, [id], (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 router.put("/:id", (req, res) => {
   const { chickenType, cause, number, date, sellerId } = req.body;
   const { id } = req.params;

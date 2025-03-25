@@ -7,6 +7,12 @@
     <link href="./batch-styles.css" rel="stylesheet" />
   </head>
   <body>
+    <button
+      class="fas fa-arrow-left"
+      onclick="window.location.href='details.html'"
+    >
+      <i class="fas fa-arrow-left"></i>Back
+    </button>
     <button onclick="createChickenLoss()">Create</button>
     <div class="container" id="chicken-loss-container">
       <form id="chickenLoss-form">
@@ -38,6 +44,7 @@
         <button onclick="closeChickenLossForm()">Close</button>
       </form>
     </div>
+    <div id="chickenLoss-data"></div>
     <script src="./batch-loss.js"></script>
   </body>
 </html>

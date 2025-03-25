@@ -22,10 +22,11 @@ const url = "http://localhost:3000";
 const expensesData = document.getElementById("expenses-data");
 let currentPage = 0;
 const recordsPerPage = 10;
+const sellerId = localStorage.getItem("ID");
 
 document.addEventListener("DOMContentLoaded", function () {
   function displayExpenses() {
-    fetch(`${url}/api/batch-expenses`)
+    fetch(`${url}/api/batch-expenses/${sellerId}`)
       .then((response) => response.json())
       .then((expenses) => {
         if (expenses.length === 0) {
@@ -130,8 +131,52 @@ document.addEventListener("DOMContentLoaded", function () {
         expensesData.innerHTML =
           "<p>Error loading expenses. Please try again later.</p>";
       });
-    displayExpenses();
   }
+
+  window.enableEditingExpense = function (id) {
+    document.getElementById(`expense-type-${id}`).disabled = false;
+    document.getElementById(`expense-cost-${id}`).disabled = false;
+    document.getElementById(`expense-date-${id}`).disabled = false;
+    document.getElementById(`save-btn-expense-${id}`).style.display = "inline";
+  };
+
+  window.saveExpense = function (id) {
+    const type = document.getElementById(`expense-type-${id}`).value;
+    const cost = document.getElementById(`expense-cost-${id}`).value;
+    const date = document.getElementById(`expense-date-${id}`).value;
+
+    fetch(`${url}/api/batch-expenses/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type, cost, date }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message);
+        displayExpenses();
+      })
+      .catch((error) => console.error("Error updating expense:", error));
+  };
+
+  window.deleteExpense = function (id) {
+    const confirmed = confirm("Do you want to delete this expense?");
+    if (confirmed) {
+      fetch(`${url}/api/batch-expenses/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.message);
+          displayExpenses();
+        })
+        .catch((error) => {
+          console.error("Error deleting expense:", error);
+          displayExpenses();
+        });
+    }
+  };
+  displayExpenses();
+
   expensesForm.addEventListener("submit", function (e) {
     e.preventDefault();
 

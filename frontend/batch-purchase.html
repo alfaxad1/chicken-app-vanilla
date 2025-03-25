@@ -7,6 +7,12 @@
     <link href="./batch-styles.css" rel="stylesheet" />
   </head>
   <body>
+    <button
+      class="fas fa-arrow-left"
+      onclick="window.location.href='details.html'"
+    >
+      <i class="fas fa-arrow-left"></i>Back
+    </button>
     <button onclick="createPurchase()">Create</button>
     <div class="container" id="purchase-container">
       <form id="purchase-form">
@@ -42,6 +48,7 @@
         </div>
       </form>
     </div>
+    <div id="purchases-data"></div>
     <script src="./batch-purchase.js"></script>
   </body>
 </html>

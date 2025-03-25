@@ -7,6 +7,12 @@
     <link href="./batch-styles.css" rel="stylesheet" />
   </head>
   <body>
+    <button
+      class="fas fa-arrow-left"
+      onclick="window.location.href='details.html'"
+    >
+      <i class="fas fa-arrow-left"></i>Back
+    </button>
     <button onclick="createExpense()">Create</button>
     <div class="container" id="expense-container">
       <form id="expenses-form">
@@ -37,8 +43,8 @@
           <button onclick="closeExpenseForm()">Close</button>
         </div>
       </form>
-      <div id="expenses-data"></div>
     </div>
+    <div id="expenses-data"></div>
     <script src="./batch-expense.js"></script>
   </body>
 </html>

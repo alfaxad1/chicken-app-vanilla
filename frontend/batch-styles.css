@@ -147,23 +147,16 @@ button:hover {
 }
 .record-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 20px;
 }
 
 .record-button {
-  width: 150px;
-  height: 60px;
-  background-color: #4caf50;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin: 0 10px;
-}
-
-.record-button:hover {
-  background-color: #3e8e41;
 }
 
 label {
@@ -258,4 +251,11 @@ td input:disabled {
 }
 .edit-btn:hover {
   background-color: #d35400;
+}
+#search-bar {
+  width: min-content;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
 }
