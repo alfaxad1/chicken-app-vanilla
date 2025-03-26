@@ -49,12 +49,21 @@ document.addEventListener("DOMContentLoaded", function () {
     // Collect form data
     const supplierId = document.getElementById("supplier-id").value;
     const chickenType = document.getElementById("type-of-chicken").value;
+    const age = document.getElementById("age-at-purchase").value;
     const price = parseFloat(pricePerPiece.value);
     const pieces = parseInt(numberOfPieces.value);
     const total = parseFloat(totalPrice.value);
     const date = document.getElementById("purchase-date").value;
 
-    const userValues = { supplierId, chickenType, price, pieces, total, date };
+    const userValues = {
+      supplierId,
+      chickenType,
+      age,
+      price,
+      pieces,
+      total,
+      date,
+    };
     console.log(userValues);
 
     // Save to the backend (API)
@@ -100,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <tr>
                                 <th>Supplier ID</th>
                                 <th>Type</th>
+                                <th>Age</th>
                                 <th>Price per Piece (Ksh)</th>
                                 <th>No. of Pieces</th>
                                 <th>Total Price</th>
@@ -146,6 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
             row.innerHTML = `
                         <td><input type="text" id="supplier-id-${purchase.id}" value="${purchase.supplier_id}" disabled></td>
                         <td><input type="text" id="type-of-chicken-${purchase.id}" value="${purchase.chicken_type}" disabled></td>
+                        <td><input type="number" id="age-at-purchase-${purchase.id}" value="${purchase.age}" disabled></td>
                         <td><input type="number" id="price-per-piece-${purchase.id}" value="${purchase.price_per_piece}" disabled></td>
                         <td><input type="number" id="number-of-pieces-${purchase.id}" value="${purchase.no_of_pieces}" disabled></td>
                         <td><input type="number" id="total-price-${purchase.id}" value="${purchase.total_price}" disabled></td>
@@ -196,6 +207,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.enableEditing = function (id) {
     document.getElementById(`supplier-id-${id}`).disabled = false;
     document.getElementById(`type-of-chicken-${id}`).disabled = false;
+    document.getElementById(`age-at-purchase-${id}`).disabled = false;
     document.getElementById(`price-per-piece-${id}`).disabled = false;
     document.getElementById(`number-of-pieces-${id}`).disabled = false;
     document.getElementById(`total-price-${id}`).disabled = false;
@@ -222,6 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Form data
     const supplierId = document.getElementById(`supplier-id-${id}`).value;
     const chickenType = document.getElementById(`type-of-chicken-${id}`).value;
+    const age = document.getElementById(`age-at-purchase-${id}`).value;
     const price = parseFloat(pricePerPiece.value);
     const pieces = parseInt(numberOfPieces.value);
     const total = parseFloat(totalPrice.value);
@@ -233,6 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
       body: JSON.stringify({
         supplierId,
         chickenType,
+        age,
         price,
         pieces,
         total,
