@@ -46,5 +46,12 @@
     </div>
     <div id="expenses-data"></div>
     <script src="./batch-expense.js"></script>
+    <script>
+      const token = localStorage.getItem("token");
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!token) {
+        window.location.href = "login.html";
+      }
+    </script>
   </body>
 </html>
