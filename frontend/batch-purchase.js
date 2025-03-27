@@ -150,6 +150,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
+        Toastify({
+          text: data.message,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true,
+        }).showToast();
         displayPurchases();
       })
       .catch((error) => console.error("Error updating purchase:", error));
@@ -164,6 +173,15 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => response.json())
         .then((data) => {
           console.log(data.message);
+          Toastify({
+            text: data.message,
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            stopOnFocus: true,
+          }).showToast();
           displayPurchases();
         })
         .catch((error) => {
@@ -191,6 +209,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
+        Toastify({
+          text: data.message,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true,
+        }).showToast();
         displayPurchases();
         closeForm();
         purchaseForm.reset();

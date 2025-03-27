@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <h3>Total cost</h3>
                     <h2>
                       ${
-                        totalChickenPurchasesCost +
+                        parseInt(totalChickenPurchasesCost) +
                         totalPurchasesCost +
                         totalExpensesCost
                       }
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(chickenLosses);
         totalChickenLoss = chickenLosses.reduce((sum, loss) => {
           if (loss.seller_id === parseInt(id)) {
-            return sum + loss.number;
+            return sum + parseInt(loss.number);
           }
           return sum;
         }, 0);
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(expenses);
         totalExpensesCost = expenses.reduce((sum, expense) => {
           if (expense.seller_id === parseInt(id)) {
-            return sum + expense.Price;
+            return sum + parseInt(expense.Price);
           }
           return sum;
         }, 0);
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(purchases);
         totalPurchasesCost = purchases.reduce((sum, purchase) => {
           if (purchase.seller_id === parseInt(id)) {
-            return sum + purchase.price;
+            return sum + parseInt(purchase.price);
           }
           return sum;
         }, 0);

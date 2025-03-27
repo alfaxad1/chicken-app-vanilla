@@ -32,15 +32,15 @@ document.addEventListener("submit", async function (event) {
         error.innerText = "Error registering user";
       }
       console.log(data.message);
-      //user created toast
-      const createdToast = document.getElementById("created-toast");
-      const toast = document.createElement("div");
-      toast.classList.add("created");
-      toast.innerHTML = `<p>${data.message}</p>`;
-      createdToast.appendChild(toast);
-      setTimeout(() => {
-        toast.remove();
-      }, 5000);
+      Toastify({
+        text: data.message,
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+        stopOnFocus: true,
+      }).showToast();
     })
     .catch((error) => {
       console.error("Error logging in:", error);

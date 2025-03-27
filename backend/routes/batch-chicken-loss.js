@@ -43,7 +43,7 @@ router.put("/:id", (req, res) => {
   const { chickenType, cause, number, date, sellerId } = req.body;
   const { id } = req.params;
   const query =
-    "UPDATE batch_chicken_loss SET chicken_type = ?, cause = ?, number = ?, date = ? seller_id = ? WHERE id = ?";
+    "UPDATE batch_chicken_loss SET chicken_type = ?, cause = ?, number = ?, date = ?, seller_id = ? WHERE id = ?";
   connection.query(
     query,
     [chickenType, cause, number, date, sellerId, id],

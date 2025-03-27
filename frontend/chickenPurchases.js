@@ -75,14 +75,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
-        const info = document.getElementById("info");
-        const toast = document.createElement("div");
-        toast.classList.add("toast");
-        toast.innerHTML = `<p>${data.message}</p>`;
-        info.appendChild(toast);
-        setTimeout(() => {
-          toast.remove();
-        }, 2000);
+        Toastify({
+          text: data.message,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true,
+        }).showToast();
 
         closeForm();
         displayPurchases();
@@ -256,14 +257,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log("Updated:", data.message);
-        const info = document.getElementById("info");
-        const toast = document.createElement("div");
-        toast.classList.add("toast");
-        toast.innerHTML = `<p>${data.message}</p>`;
-        info.appendChild(toast);
-        setTimeout(() => {
-          toast.remove();
-        }, 2000);
+        Toastify({
+          text: data.message,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true,
+        }).showToast();
         displayPurchases(); // Refresh the table
       })
       .catch((error) => console.error("Error:", error));
@@ -280,15 +282,16 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => response.json())
         .then((data) => {
           console.log("Deleted:", data.message);
+          Toastify({
+            text: data.message,
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            stopOnFocus: true,
+          }).showToast();
           displayPurchases(); // Refresh the table
-          const info = document.getElementById("info");
-          const toast = document.createElement("div");
-          toast.classList.add("toast");
-          toast.innerHTML = `<p>${data.message}</p>`;
-          info.appendChild(toast);
-          setTimeout(() => {
-            toast.remove();
-          }, 2000);
         })
         .catch((error) => console.error("Error:", error));
     }

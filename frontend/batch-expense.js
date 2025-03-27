@@ -148,11 +148,20 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(`${url}/api/batch-expenses/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type, cost, date }),
+      body: JSON.stringify({ type, cost, date, sellerId }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
+        Toastify({
+          text: data.message,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true,
+        }).showToast();
         displayExpenses();
       })
       .catch((error) => console.error("Error updating expense:", error));
@@ -167,6 +176,15 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => response.json())
         .then((data) => {
           console.log(data.message);
+          Toastify({
+            text: data.message,
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            stopOnFocus: true,
+          }).showToast();
           displayExpenses();
         })
         .catch((error) => {
@@ -193,6 +211,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
+        Toastify({
+          text: data.message,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true,
+        }).showToast();
         expensesForm.reset();
         closeExpenseForm();
         displayExpenses();

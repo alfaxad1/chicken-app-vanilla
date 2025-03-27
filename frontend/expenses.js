@@ -42,14 +42,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
-        const info = document.getElementById("info");
-        const toast = document.createElement("div");
-        toast.classList.add("toast");
-        toast.innerHTML = `<p>${data.message}</p>`;
-        info.appendChild(toast);
-        setTimeout(() => {
-          toast.remove();
-        }, 2000);
+        Toastify({
+          text: data.message,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true,
+        }).showToast();
 
         expensesForm.reset();
         closeForm();
@@ -188,14 +189,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
-        const info = document.getElementById("info");
-        const toast = document.createElement("div");
-        toast.classList.add("toast");
-        toast.innerHTML = `<p>${data.message}</p>`;
-        info.appendChild(toast);
-        setTimeout(() => {
-          toast.remove();
-        }, 2000);
+        Toastify({
+          text: data.message,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true,
+        }).showToast();
         displayExpenses();
       })
       .catch((error) => console.error("Error updating expense:", error));
@@ -211,14 +213,16 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((data) => {
           console.log(data.message);
           displayExpenses();
-          const info = document.getElementById("info");
-          const toast = document.createElement("div");
-          toast.classList.add("toast");
-          toast.innerHTML = `<p>${data.message}</p>`;
-          info.appendChild(toast);
-          setTimeout(() => {
-            toast.remove();
-          }, 2000);
+          Toastify({
+            text: data.message,
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            stopOnFocus: true,
+          }).showToast();
+          displayExpenses();
         })
         .catch((error) => {
           console.error("Error deleting expense:", error);

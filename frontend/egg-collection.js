@@ -48,14 +48,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
-        const info = document.getElementById("info");
-        const toast = document.createElement("div");
-        toast.classList.add("toast");
-        toast.innerHTML = `<p>${data.message}</p>`;
-        info.appendChild(toast);
-        setTimeout(() => {
-          toast.remove();
-        }, 2000);
+        Toastify({
+          text: data.message,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true,
+        }).showToast();
 
         closeForm();
         displayCollectionHistory();
@@ -174,14 +175,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
-        const info = document.getElementById("info");
-        const toast = document.createElement("div");
-        toast.classList.add("toast");
-        toast.innerHTML = `<p>${data.message}</p>`;
-        info.appendChild(toast);
-        setTimeout(() => {
-          toast.remove();
-        }, 2000);
+        Toastify({
+          text: data.message,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true,
+        }).showToast();
 
         updateChart();
         displayCollectionHistory();
@@ -253,14 +255,15 @@ document.addEventListener("DOMContentLoaded", function () {
       })
         .then((response) => response.json())
         .then((data) => {
-          const info = document.getElementById("info");
-          const toast = document.createElement("div");
-          toast.classList.add("toast");
-          toast.innerHTML = `<p>${data.message}</p>`;
-          info.appendChild(toast);
-          setTimeout(() => {
-            toast.remove();
-          }, 2000);
+          Toastify({
+            text: data.message,
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            stopOnFocus: true,
+          }).showToast();
 
           displayCollectionHistory();
           updateChart();

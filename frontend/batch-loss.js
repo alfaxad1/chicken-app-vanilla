@@ -140,6 +140,42 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   };
 
+  window.enableEditingLoss = function (id) {
+    document.getElementById(`chicken-type-${id}`).disabled = false;
+    document.getElementById(`number-${id}`).disabled = false;
+    document.getElementById(`cause-${id}`).disabled = false;
+    document.getElementById(`date-${id}`).disabled = false;
+    document.getElementById(`save-btn-loss-${id}`).style.display = "inline";
+  };
+
+  window.saveLoss = function (id) {
+    const chickenType = document.getElementById(`chicken-type-${id}`).value;
+    const cause = document.getElementById(`cause-${id}`).value;
+    const number = document.getElementById(`number-${id}`).value;
+    const date = document.getElementById(`date-${id}`).value;
+
+    fetch(`${url}/api/batch-chicken-loss/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chickenType, cause, number, date, sellerId }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message);
+        Toastify({
+          text: data.message,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true,
+        }).showToast();
+        fetchChikenLosses();
+      })
+      .catch((error) => console.error("Error updating loss:", error));
+  };
+
   window.deleteChickenLoss = function (id) {
     const confirmed = confirm("Are you sure you want to delete");
     if (confirmed) {
@@ -149,6 +185,15 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => response.json())
         .then((data) => {
           console.log(data.message);
+          Toastify({
+            text: data.message,
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            stopOnFocus: true,
+          }).showToast();
           fetchChikenLosses();
         })
         .catch((error) => {
@@ -175,6 +220,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        Toastify({
+          text: data.message,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true,
+        }).showToast();
         chickenLossForm.reset();
         closeChickenLossForm();
         fetchChikenLosses();

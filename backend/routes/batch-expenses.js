@@ -66,7 +66,7 @@ router.put("/:id", (request, response) => {
   const { type, cost, date, sellerId } = request.body;
 
   const query =
-    "UPDATE batch_expenses SET Type = ?, Price = ?, Date = ? seller_id = ? WHERE id = ?";
+    "UPDATE batch_expenses SET Type = ?, Price = ?, Date = ?, seller_id = ? WHERE id = ?";
 
   connection.query(query, [type, cost, date, sellerId, id], (err, result) => {
     if (err) {
