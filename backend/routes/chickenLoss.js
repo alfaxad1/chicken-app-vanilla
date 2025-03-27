@@ -17,7 +17,7 @@ router.post("/", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  const query = "SELECT * FROM chicken_loss";
+  const query = "SELECT * FROM chicken_loss ORDER BY date DESC";
   connection.query(query, (err, results) => {
     if (err) throw err;
     res.json(results);

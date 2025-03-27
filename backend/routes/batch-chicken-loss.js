@@ -31,7 +31,8 @@ router.get("/", (req, res) => {
 //retrieve by seller id
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  const query = "SELECT * FROM batch_chicken_loss WHERE seller_id = ?";
+  const query =
+    "SELECT * FROM batch_chicken_loss WHERE seller_id = ? ORDER BY date DESC";
   connection.query(query, [id], (err, results) => {
     if (err) throw err;
     res.json(results);

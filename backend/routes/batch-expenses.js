@@ -48,7 +48,8 @@ router.get("/", (request, response) => {
 //retrieve expenses by sellerid
 router.get("/:id", (request, response) => {
   const { id } = request.params;
-  const query = "SELECT * FROM batch_expenses WHERE seller_id = ?";
+  const query =
+    "SELECT * FROM batch_expenses WHERE seller_id = ? ORDER BY Date DESC";
 
   connection.query(query, [id], (err, results) => {
     if (err) {

@@ -5,7 +5,7 @@ router.use(express.json());
 
 // Get all chicken purchases
 router.get("/", (req, res) => {
-  const query = "SELECT * FROM chicken_purchases";
+  const query = "SELECT * FROM chicken_purchases ORDER BY purchase_date DESC";
   connection.query(query, (err, results) => {
     if (err) throw err;
     res.json(results);

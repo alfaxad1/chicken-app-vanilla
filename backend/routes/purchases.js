@@ -6,7 +6,7 @@ router.use(express.json());
 
 //get purchases
 router.get("/", (req, res) => {
-  const query = "SELECT * FROM purchases";
+  const query = "SELECT * FROM purchases ORDER BY purchase_date DESC";
   connection.query(query, (err, results) => {
     if (err) {
       return res.status(500).json({ error: err.message });

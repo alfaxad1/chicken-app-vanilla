@@ -47,7 +47,8 @@ router.get("/", (req, res) => {
 //get by id
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  const query = "SELECT * FROM batch_purchases WHERE seller_id = ?";
+  const query =
+    "SELECT * FROM batch_purchases WHERE seller_id = ? ORDER BY purchase_date DESC";
   connection.query(query, [id], (err, results) => {
     if (err) {
       return res.status(500).json({ error: err.message });
