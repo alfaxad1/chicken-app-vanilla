@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "./backend/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "app.js",
     "dev": "nodemon app.js"
   },
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "axios": "^1.7.9",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.9",
     "toastify-js": "^1.12.0"
   }
