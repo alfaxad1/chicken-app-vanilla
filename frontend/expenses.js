@@ -18,7 +18,8 @@ container.addEventListener("click", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const url = "http://localhost:3000";
+  //const url = "http://localhost:3000";
+
   const expensesForm = document.getElementById("expenses-form");
   const expensesData = document.getElementById("expenses-data");
 
